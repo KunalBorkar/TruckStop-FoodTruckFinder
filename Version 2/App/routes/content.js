@@ -7,10 +7,7 @@ function ContentHandler (db) {
     this.displayMainPage = function(req, res, next) {
         "use strict";
 
-		return res.render('truckstop', {
-                title: 'blog homepage',
-                username: req.username      
-        });
+		return res.render("FirstPage");
     }
 }
 

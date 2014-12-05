@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="assets/img/favicon.png">
+
+    <title>Welcome to TruckStop</title>
+
+    <link rel="stylesheet" type="text/css" href="assets/css/demo.css" />
+    <link rel="stylesheet" type="text/css" href="assets/css/style1.css" />
+
+      <!-- Bootstrap core CSS -->
+    <link href="assets/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="assets/css/main.css" rel="stylesheet">
+
+    <!-- Fonts from Google Fonts -->
+	<link href='http://fonts.googleapis.com/css?family=Lato:300,400,900' rel='stylesheet' type='text/css'>
+
+      <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body onpageshow="getLocation()">
+
+    <!-- Fixed navbar -->
+    <div class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+            <h1 class="navbar-brand"><b>TruckStop</b></h1>
+          <!--<a class="navbar-brand" href="#"><b>TruckStop</b></a>-->
+        </div>
+        <form method="post">
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><input type="text" class="form-control form-control-header" id="exampleHeaderInputName" name="emailID" placeholder="Enter your Username"></li>
+                    <li><input type="password" class="form-control form-control-header" id="exampleHeaderInputPassword" name="passwd" placeholder="Enter your Password"></li>
+                    <li><button type="submit" class="btn btn-warning btn-header">LOGIN</button></li>
+                </ul>
+            </div><!--/.nav-collapse -->
+        </form>
+      </div>
+    </div>
+
+	<div id="headerwrap">
+       <ul class="cb-slideshow">
+           <li><span>Image 01</span><div><h3>re·lax·a·tion</h3></div></li>
+           <li><span>Image 02</span><div><h3>qui·e·tude</h3></div></li>
+           <li><span>Image 03</span><div><h3>bal·ance</h3></div></li>
+           <li><span>Image 04</span><div><h3>e·qua·nim·i·ty</h3></div></li>
+           <li><span>Image 05</span><div><h3>com·po·sure</h3></div></li>
+           <li><span>Image 06</span><div><h3>se·ren·i·ty</h3></div></li>
+       </ul>
+        <div class="row">
+
+        </div>
+	</div><!-- /headerwrap -->
+
+	<div class="container">
+		<div class="row mt centered">
+			<div class="col-lg-6 col-lg-offset-3">
+                <br>
+                <h1 class="control-label">Don't have an account,<br/>
+                    join us now.</h1>
+                <form method="post" class="form-inline" role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="exampleInputName" placeholder="Enter your First Name" name="firstName">
+                        <input type="text" class="form-control" id="exampleInputLastName" placeholder="Enter your Last Name" name="lastName">
+                        <input type="email" class="form-control" id="exampleInputEmail" placeholder="Enter your Email Address" name="emailAddress">
+                        <input type="password" class="form-control" id="exampleInputPassword" placeholder="Enter your Password"  name="password">
+                        <br>
+                        <div class="">
+                        <h6 class="lblradioquestion">Own a FoodTruck?</h6>
+                        </div>
+                        <div class="">
+                            <div class="radio">
+                                <h6 class="lblradioquestion">
+                                    <input type="radio" name="truckOwner" id="optionsRadios1" value="Yes" >
+                                    Yes
+                                </h6>
+                            </div>
+                            <div class="radio">
+                                <h6 class="lblradioquestion">
+                                    <input type="radio" name="truckOwner" id="optionsRadios2" value="No" checked="">
+                                    No
+                                </h6>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-warning btn-lg joinbtn">JOIN NOW</button>
+                    <input id = "latitudeText" type = "hidden" name="latitude">
+                    <input id = "longitudeText" type = "hidden" name="longitude">
+                </form>
+		</div><!-- /row -->
+		</div><!-- /row -->
+	</div><!-- /container -->
+	
+	<div class="container">
+		<div class="row centered">
+			<div class="col-lg-6 col-lg-offset-3">
+			</div>
+			<div class="col-lg-3"></div>
+		</div><!-- /row -->
+		<hr>
+	</div><!-- /container -->
+	
+	<div class="container">
+		<div class="row mt centered">
+			<div class="col-lg-6 col-lg-offset-3">
+			</div>
+		</div><!-- /row -->
+	</div><! --/container -->
+
+	<div class="container">
+		<div class="row mt centered">
+			<div class="col-lg-6 col-lg-offset-3">
+				<h1 class="control-label">Our Awesome Team.<br/>Design Lovers.</h1>
+			</div>
+		</div><!-- /row -->
+		
+		<div class="row mt centered">
+			<div class="col-lg-4">
+				<img class="img-circle" src="assets/img/pic1.jpg" width="140" alt="">
+				<h4>Michael Robson</h4>
+				<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever.</p>
+				<p><i class="glyphicon glyphicon-send"></i> <i class="glyphicon glyphicon-phone"></i> <i class="glyphicon glyphicon-globe"></i></p>
+			</div><!--/col-lg-4 -->
+
+			<div class="col-lg-4">
+				<img class="img-circle" src="assets/img/pic2.jpg" width="140" alt="">
+				<h4>Pete Ford</h4>
+				<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever.</p>
+				<p><i class="glyphicon glyphicon-send"></i> <i class="glyphicon glyphicon-phone"></i> <i class="glyphicon glyphicon-globe"></i></p>
+			</div><!--/col-lg-4 -->
+
+			<div class="col-lg-4">
+				<img class="img-circle" src="assets/img/pic3.jpg" width="140" alt="">
+				<h4>Angelica Finning</h4>
+				<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever.</p>
+				<p><i class="glyphicon glyphicon-send"></i> <i class="glyphicon glyphicon-phone"></i> <i class="glyphicon glyphicon-globe"></i></p>
+			</div><!--/col-lg-4 -->
+            </div>
+            <div class="row mt centered">
+            <div class="col-lg-4 col-lg-push-2">
+                <img class="img-circle" src="assets/img/pic3.jpg" width="140" alt="">
+                <h4>Angelica Finning</h4>
+                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever.</p>
+                <p><i class="glyphicon glyphicon-send"></i> <i class="glyphicon glyphicon-phone"></i> <i class="glyphicon glyphicon-globe"></i></p>
+            </div><!--/col-lg-4 -->
+
+            <div class="col-lg-4 col-lg-push-2">
+                <img class="img-circle" src="assets/img/pic3.jpg" width="140" alt="">
+                <h4>Angelica Finning</h4>
+                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever.</p>
+                <p><i class="glyphicon glyphicon-send"></i> <i class="glyphicon glyphicon-phone"></i> <i class="glyphicon glyphicon-globe"></i></p>
+            </div><!--/col-lg-4 -->
+
+		</div><!-- /row -->
+	</div><!-- /container -->
+	
+	<div class="container">
+        <hr>
+			<p class="footer centered">Created by sAaPkUnUvA</p>
+	</div><!-- /container -->
+	
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="assets/js/modernizr.custom.86080.js"></script>
+    <script type="text/javascript">
+        function showLocation(position) {
+            var latitude = position.coords.latitude;
+            var longitude = position.coords.longitude;
+            //alert("Latitude : " + latitude + " Longitude: " + longitude);
+            var lat = document.getElementById('latitudeText');
+            lat.value = latitude;
+            var longi = document.getElementById('longitudeText');
+            longi.value = longitude;
+            //  document.forms["signupform"].submit();
+        }
+
+        function errorHandler(err) {
+            if(err.code == 1) {
+                alert("Error: Access is denied!");
+            }else if( err.code == 2) {
+                alert("Error: Position is unavailable!");
+            }
+        }
+        function getLocation(){
+
+            if(navigator.geolocation){
+                // timeout at 60000 milliseconds (60 seconds)
+                var options = {timeout:60000};
+                navigator.geolocation.getCurrentPosition(showLocation,
+                        errorHandler,
+                        options);
+
+            }else{
+                alert("Sorry, browser does not support geolocation!");
+            }
+        }
+    </script>
+  </body>
+</html>
