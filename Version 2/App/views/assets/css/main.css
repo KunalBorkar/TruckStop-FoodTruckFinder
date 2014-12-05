@@ -196,3 +196,11 @@ i {
     color: white;
     font-size: 20px;
 }
+.form-control-header-rounded{
+    height: 32px;
+    font-size: 16px;
+    width: 400px;
+    margin-top: 30px;
+    margin-right: 18px;
+    border-radius: 5px;
+}
