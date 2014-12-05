@@ -57,7 +57,7 @@ function SessionHandler (db) {
                     return res.render("login", {emailID:username, passwd:"", username_error:"No such user"});
                 }
                 else if (err.invalid_password) {
-                    return res.render("login", {emailID:username, passwd:"", login_error:"Invalid password"});
+                    return res.render("FirstPage", {emailID:username, passwd:"", login_error:"Invalid password"});
                 }
                 else {
                     // Some other kind of error
@@ -71,7 +71,7 @@ function SessionHandler (db) {
                 if (err) return next(err);
 
                 res.cookie('session', session_id);
-                return res.redirect('/FirstPage');
+                return res.redirect('/welcome');
             });
         });
 
@@ -101,7 +101,7 @@ function SessionHandler (db) {
                     if (err) return next(err);
 
                     res.cookie('session', session_id);
-                    return res.redirect('/FirstPage');
+                    return res.redirect('/welcome');
                 });
             });
         }
