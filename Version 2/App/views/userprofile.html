@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Post an article here!</title>
+	<meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TruckStop</title>
+    <link rel="stylesheet" href="css/foundation.css" />
+	<link rel="stylesheet" href="css/style.css"/>
+	<link rel="icon" href ="img/favicon.ico">
+    <script src="js/vendor/modernizr.js"></script>
+</head>
+<body>
+	<div id="heading" class="row">
+		<div class="small-6 columns">
+			<h1 id="title" class="subheader">
+				Truck Stop
+			</h1>	
+		</div>
+	</div>
+	
+	<div id ="mainContainer" class="row">
+	<p><h2 id="h3">Welcome,{username}<br></h2><p>
+	<h3 id="h3">Please Enter Your Information-</h3>
+	<div class="small-3 columns">
+	<label> Food Truck Name : </label>
+	<br>
+	<label>License Number : </label>
+	<br>
+	<label>Your Speciality Cuisine : </label>
+	<br>
+	<label>Operating Hours : </label>
+	<br>
+	<label>About Me : </label>
+	<br>
+	<label>Image : </label>
+	</div>
+	
+		<div class="small-3 pull-4 columns">
+		<form method="post" enctype="multipart/form-data">	
+			<input type="text" name="FoodTruckName"/>
+			<input type="text" name="LicenseNumber"/>
+			<input type="text" name="SpecialityCuisine"/>
+			<input type="text" name="OperatingHours"/>
+			<textarea name="AboutMe"> Something about you</textarea>
+			<input class="tiny button round" style="background-color:brown;color:white;font-weight:bold" type="file"/>
+			<input type="submit" class="tiny button round" style="background-color:brown;color:white;font-weight:bold"4 value="Get Started"/>
+		</div>
+		</div>
+			</form>	
+<script src="js/vendor/jquery.js"></script>
+<script src="js/foundation.min.js"></script>
+<script>
+  $(document).foundation();
+</script>
+</body>
+</html>

@@ -121,7 +121,7 @@ body {
 	  /* background:url('../Capture.png') no-repeat center center;  */
 	  /* background:url('../social-food-truck-360.jpg') no-repeat center center;  */
 	  /* background:url('../BeFunky.jpg') no-repeat center center; */
-	background-size:100% 100%;
+	background-size:cover;
 }
 #imagecontainer{
 	opacity: 0.8;
