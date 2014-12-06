@@ -15,6 +15,7 @@ function UsersDAO(db) {
 
     var users = db.collection("user");
 	var userImages = db.collection("userImage");
+    var trucks = db.collection("trucks");
 
     this.addUser = function(firstName, lastName, emailAddress, password, radio, latitude, longitude, callback) {
         "use strict";
@@ -80,31 +81,41 @@ function UsersDAO(db) {
 			
 		});	
 	}
-
-
-
-     this.EditProfile = function(userID, WhatILike, Distance, callback) {
-        
-        console.log(userID);
-        var userprofileinfo = {$set: {'whatilike': WhatILike, 'Distance': Distance}};
-        var query = {_id: userID};
-        users.update(query, userprofileinfo, function(err, result){
-            callback(err, userprofileinfo);
-        });
-        
-    }
-
-
-
-
-
-    
 	
 	this.showProfile = function (id, callback) {
 		userProfiles.findOne({'_id': id}, function(err, user){
 			callback(err, user);
 		});
 	}
+
+    //Function to get latitude and longitude of a user.
+    this.findLocation = function (username, callback) {
+        users.findOne({'_id': username}, function(err, user){
+            callback(err, user);
+        });
+    }
+
+/*
+    this.findTruckLocations = function (callback) {
+        trucks.find({}, function(err, truck){
+            callback(err, user);
+        });
+    }
+*/
+
+    this.getTrucks = function(num, callback) {
+        "use strict";
+
+        trucks.find().sort('_id', -1).limit(num).toArray(function(err, items) {
+            "use strict";
+
+            if (err) return callback(err, null);
+
+            console.log("Found " + items.length + " posts");
+
+            callback(err, items);
+        });
+    }
 
 }
 

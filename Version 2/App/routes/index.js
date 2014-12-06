@@ -45,7 +45,9 @@ module.exports = exports = function(app, db) {
     app.get('/EditPRofile', contentHandler.displayEditProfilePage);
     app.post('/EditPRofile', sessionHandler.EditProfile);
 	//app.post("/truckUserDashboard", );
-	
+
+    //request to navigate to User's Dash Board
+    app.get("/userDashboard", contentHandler.displayUserDashboardPage);
 
     // Error handling middleware
     app.use(ErrorHandler);
