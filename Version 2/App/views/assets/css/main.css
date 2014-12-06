@@ -113,7 +113,7 @@ a:after {
 .form-control {
 	height: 42px;
 	font-size: 18px;
-	width: 280px;
+	width: 300px;
     margin-bottom: 8px;
 }
 
@@ -183,6 +183,13 @@ i {
     font-size: 50px;
     padding-bottom: 10px;
 }
+
+.control-label1{
+    color: white;
+    font-size: 20px;
+    padding-bottom: 10px;
+}
+
 .radio{
     padding-left: 0px;
 }
