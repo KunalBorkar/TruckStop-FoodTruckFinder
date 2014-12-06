@@ -1,4 +1,6 @@
-var bcrypt = require('bcrypt-nodejs');
+var bcrypt = require('bcrypt-nodejs')
+	, MongoDb = require("mongodb")
+	, fs = require("fs");
 
 /* The UsersDAO must be constructed with a connected database object */
 function UsersDAO(db) {
@@ -12,15 +14,16 @@ function UsersDAO(db) {
     }
 
     var users = db.collection("user");
+	var userImages = db.collection("userImage");
 
-    this.addUser = function(firstName, lastName, emailAddress, password, radio, callback) {
+    this.addUser = function(firstName, lastName, emailAddress, password, radio, latitude, longitude, callback) {
         "use strict";
         // Generate password hash
         var salt = bcrypt.genSaltSync();
         var password_hash = bcrypt.hashSync(password, salt);
 
         // Create user document
-        var user = {'_id': emailAddress, 'firstName': firstName, 'lastName': lastName, 'password': password_hash, 'truckOwner': radio};
+        var user = {'_id': emailAddress, 'firstName': firstName, 'lastName': lastName, 'password': password_hash, 'truckOwner': radio, 'latitude': latitude, 'longitude':longitude};
 
         // TODO: hw2.3
 		users.insert(user, function(err, result){
@@ -56,6 +59,34 @@ function UsersDAO(db) {
             }
         });
 		}
+		
+		this.addTruckUserProfile = function(userID, foodTruckName, licenseNumber, specialityCuisine, operatingHours, aboutMe, profileImage, callback) {
+		
+		var truckUserProfileInfo = {$set : {'food_truck_name': foodTruckName, 'license_number': licenseNumber, 'speciality_cuisine': specialityCuisine, 'operating_hours': operatingHours, 'about_me': aboutMe}};
+		
+		var data = fs.readFileSync(profileImage.path);
+		
+        var image = new MongoDb.Binary(data);
+        var imageType = profileImage.type;
+        var imageName = profileImage.name;
+		
+		var userImageInfo = {'_id': userID, 'image': image, 'image_type': imageType, 'image_name': imageName}
+		
+		
+		
+		users.update({'_id': userID},truckUserProfileInfo, function(err, result){
+		userImages.save(userImageInfo, function(err, result){ 
+		callback(err, truckUserProfileInfo);
+		});
+			
+		});	
+	}
+	
+	this.showProfile = function (id, callback) {
+		userProfiles.findOne({'_id': id}, function(err, user){
+			callback(err, user);
+		});
+	}
 
 }
 

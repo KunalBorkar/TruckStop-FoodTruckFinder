@@ -101,7 +101,7 @@ function SessionHandler (db) {
                     if (err) return next(err);
 
                     res.cookie('session', session_id);
-                    return res.redirect('/welcome');
+                    return res.redirect('/truckSignUp');
                 });
             });
         }
@@ -182,6 +182,57 @@ function SessionHandler (db) {
 
         return res.render("welcome", {'username':req.username})
     }
+	
+	this.displayDashboard = function (req, res, next) {
+	"use strict";
+	var userID = req.username
+		//console.log(userID);
+	var foodTruckName = req.body.FoodTruckName;
+	var licenseNumber = req.body.LicenseNumber;
+	var specialityCuisine= req.body.SpecialityCuisine;
+	var operatingHours = req.body.OperatingHours;
+	var aboutMe = req.body.AboutMe;
+	var profileImage = req.files.image;
+	
+	
+	users.addTruckUserProfile(userID, foodTruckName, licenseNumber, specialityCuisine, operatingHours, aboutMe, profileImage, function(err, user) {
+                "use strict";
+
+                if (err) {
+                    // this was a duplicate
+                    if (err.code == '11000') {
+                        errors['email_error'] = "This Email Address is already Signed Up!!";
+                        return res.render("truckstop", errors);
+                    }
+                    // this was a different error
+                    else {
+                        return next(err);
+                    }
+                }
+
+		return res.redirect("/truckUserDashboard");
+		});
+	}
+
+	this.showProfile = function (req, res, next) {
+	"use strict";
+		var id = "kunal"
+		users.showProfile(id, function(err, user) {
+		if (err) {
+                    // this was a duplicate
+                    if (err.code == '11000') {
+                        errors['email_error'] = "This Email Address is already Signed Up!!";
+                        return res.render("truckstop", errors);
+                    }
+                    // this was a different error
+                    else {
+                        return next(err);
+                    }
+                }
+				
+			return res.render("index2", {'foodTruckName': user._id, 'licenseNumber': user.license_number, 'specialityCuisine': user.speciality_cuisine, 'operatingHours': user.operatin_hours, 'aboutMe': user.about_me})
+	});
+	}
 }
 
 module.exports = SessionHandler;

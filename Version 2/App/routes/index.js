@@ -36,9 +36,12 @@ module.exports = exports = function(app, db) {
     // Welcome page
     app.get("/welcome", sessionHandler.displayWelcomePage);
 
-    // Signup form
-    //app.get('/signup', sessionHandler.displaySignupPage);
-    //app.post('/signup', sessionHandler.handleSignup);
+    app.get("/trucksignup",contentHandler.displayTruckSignupPage);
+	app.post("/trucksignup",sessionHandler.displayDashboard);
+	
+	app.get("/truckUserDashboard", contentHandler.displayTruckUserDashboardPage);
+	//app.post("/truckUserDashboard", );
+	
 
     // Error handling middleware
     app.use(ErrorHandler);

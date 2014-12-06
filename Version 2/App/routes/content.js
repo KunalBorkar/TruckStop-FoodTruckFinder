@@ -9,6 +9,18 @@ function ContentHandler (db) {
 
 		return res.render("FirstPage");
     }
+	
+	this.displayTruckSignupPage = function(req, res, next) {
+        "use strict";
+
+		return res.render('truckSignUp');
+    }
+	
+	this.displayTruckUserDashboardPage = function(req, res, next) {
+        "use strict";
+
+		return res.render('truckUserDashboard');
+    }
 }
 
 module.exports = ContentHandler;
