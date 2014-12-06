@@ -1,0 +1,31 @@
+<html>
+	<head>
+		<title>Post an article here</title>
+	</head>
+	<body>
+		<form method="post" enctype="multipart/form-data">
+			<label> Name : </label>
+						<br/>
+			<label>Email Address: </label>
+						<br/>
+			<label>Settings : </label>
+						<br/>
+			<label>What I like most: </label>
+			<input type="text" name="WhatILike"/>
+			<br/>
+			<label>Notify when food truck is within :</label>
+			<select name="Distance">
+			<option value="2">2</option>
+                        <option value="5">5</option>
+                        <option value="7">7</option>
+                        </select>
+			<br/>
+			
+			<br/>
+			<label for="image">Upload new Image : </label>
+			<input type="file" name="image"/>
+			<br/>
+			<input type="submit" value="Done"/>
+		</form>
+	</body>
+</html>

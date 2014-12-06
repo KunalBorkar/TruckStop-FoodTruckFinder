@@ -40,6 +40,10 @@ module.exports = exports = function(app, db) {
 	app.post("/trucksignup",sessionHandler.displayDashboard);
 	
 	app.get("/truckUserDashboard", contentHandler.displayTruckUserDashboardPage);
+
+    app.get('/GenUserProfile', contentHandler.displayProfile);
+    app.get('/EditPRofile', contentHandler.displayEditProfilePage);
+    app.post('/EditPRofile', sessionHandler.EditProfile);
 	//app.post("/truckUserDashboard", );
 	
 

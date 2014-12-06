@@ -80,6 +80,25 @@ function UsersDAO(db) {
 			
 		});	
 	}
+
+
+
+     this.EditProfile = function(userID, WhatILike, Distance, callback) {
+        
+        console.log(userID);
+        var userprofileinfo = {$set: {'whatilike': WhatILike, 'Distance': Distance}};
+        var query = {_id: userID};
+        users.update(query, userprofileinfo, function(err, result){
+            callback(err, userprofileinfo);
+        });
+        
+    }
+
+
+
+
+
+    
 	
 	this.showProfile = function (id, callback) {
 		userProfiles.findOne({'_id': id}, function(err, user){

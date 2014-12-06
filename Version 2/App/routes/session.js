@@ -221,6 +221,54 @@ function SessionHandler (db) {
 		});
 	}
 
+
+
+
+
+
+    this.EditProfile = function (req, res, next) {
+    "use strict";
+    console.log("EditProfile");
+      
+        var userID=req.username;
+        var WhatILike = req.body.WhatILike;
+        var Distance = req.body.Distance;
+        console.log(req);
+    
+        console.log(userID);
+        users.EditProfile(userID, WhatILike, Distance, function(err, user) {
+                "use strict";
+
+                if (err) {
+                    // this was a duplicate
+                    if (err.code == '11000') {
+                        errors['email_error'] = "Error";
+                        return res.render("truckstop", errors);
+                    }
+                    // this was a different error
+                    else {
+                        return next(err);
+                    }
+                }
+              
+
+        return res.redirect('/GenUserProfile');
+        });
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
 	this.showProfile = function (req, res, next) {
 	"use strict";
 		var id = "kunal"
