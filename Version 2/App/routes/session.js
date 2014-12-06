@@ -106,6 +106,12 @@ function SessionHandler (db) {
                     if (err) return next(err);
 
                     res.cookie('session', session_id);
+
+                     if(radio=="No")
+                        return res.redirect('/EditProfile');
+                    else
+                   
+
                     return res.redirect('/truckSignUp');
                 });
             });
