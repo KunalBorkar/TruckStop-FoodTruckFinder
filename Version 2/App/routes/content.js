@@ -24,6 +24,11 @@ function ContentHandler (db) {
 		return res.render('truckUserDashboard');
     }
 
+	/*this.displayUserDashboardPage = function(req, res, next) {
+        "use strict";
+
+		return res.render('userDashboard');
+    }*/
 
 
     this.displayEditProfilePage = function(req, res, next) {
@@ -66,7 +71,7 @@ function ContentHandler (db) {
                 "use strict";
 
                 if (err) return next(err);
-                return res.render("dashboard", {'latitude': user.latitude, 'longitude': user.longitude, 'locations':results})
+                return res.render("userDashboard", {'latitude': user.latitude, 'longitude': user.longitude, 'locations':results})
             });
         });
     }

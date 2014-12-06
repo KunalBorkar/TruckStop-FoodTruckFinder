@@ -34,9 +34,6 @@ function SessionHandler (db) {
 	var radio = req.body.truckOwner;
     var latitude = req.body.latitude;
     var longitude = req.body.longitude;
-    console.log(req.body);
-	
-	console.log(radio);
 	
 	var emailID = req.body.emailID;
 	var passwd = req.body.passwd;
@@ -222,10 +219,6 @@ function SessionHandler (db) {
 	}
 
 
-
-
-
-
     this.EditProfile = function (req, res, next) {
     "use strict";
     console.log("EditProfile");
@@ -255,18 +248,6 @@ function SessionHandler (db) {
         return res.redirect('/GenUserProfile');
         });
     }
-
-
-
-
-
-
-
-
-
-
-
-
     
 
 	this.showProfile = function (req, res, next) {
