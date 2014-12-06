@@ -64,14 +64,22 @@ function SessionHandler (db) {
                     return next(err);
                 }
             }
-
+			
             sessions.startSession(user['_id'], function(err, session_id) {
                 "use strict";
 
                 if (err) return next(err);
-
                 res.cookie('session', session_id);
-                return res.redirect('/welcome');
+				
+				var isItTruckUser = user['truckOwner'];
+				if(isItTruckUser == "Yes")
+				{
+					return res.redirect('/truckUserDashboard');
+				}
+				else
+				{
+					return res.redirect('/userDashboard');
+				}
             });
         });
 
@@ -185,8 +193,7 @@ function SessionHandler (db) {
 	
 	this.displayDashboard = function (req, res, next) {
 	"use strict";
-	var userID = req.username
-		//console.log(userID);
+	var userID = req.username;
 	var foodTruckName = req.body.FoodTruckName;
 	var licenseNumber = req.body.LicenseNumber;
 	var specialityCuisine= req.body.SpecialityCuisine;
