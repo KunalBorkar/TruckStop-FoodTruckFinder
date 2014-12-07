@@ -117,6 +117,29 @@ function UsersDAO(db) {
         });
     }
 
+
+     this.EditProfile = function(userID, WhatILike, Distance,profileImage, callback) {
+        
+        var userprofileinfo = {$set: {'whatilike': WhatILike, 'Distance': Distance}};
+        var query = {_id: userID};
+
+        var data = fs.readFileSync(profileImage.path);
+        var image = new MongoDb.Binary(data);
+        var imageType = profileImage.type;
+        var imageName = profileImage.name;
+        
+        var userImageInfo = {'_id': userID, 'image': image, 'image_type': imageType, 'image_name': imageName}
+
+
+
+        users.update(query, userprofileinfo, function(err, result){
+            userImages.save(userImageInfo, function(err, result){ 
+            callback(err, userprofileinfo);
+        });
+        });
+    }
+
+
 }
 
 module.exports.UsersDAO = UsersDAO;

@@ -31,18 +31,29 @@ function ContentHandler (db) {
     }*/
 
 
+   
+
+
+    var us= db.collection('user');
     this.displayEditProfilePage = function(req, res, next) {
         "use strict";
 
-        return res.render('EditProfile');
+
+         var userID= req.username;
+          us.findOne({ '_id' : userID}, function(err, user) {
+            "use strict"; 
+
+        return res.render('EditProfile',{'firstName': user.firstName, 'lastName': user.lastName, 'emailAddress' : user._id});
+    });
     }
 
 
-   // var users= db.collection('user');
+    //var users= db.collection('user');
     this.displayProfile = function(req, res, next) {
         "use strict";
 
-          users.findOne({ '_id' : "n@yahoo.com"}, function(err, user) {
+         var userID= req.username;
+          us.findOne({ '_id' : userID}, function(err, user) {
             "use strict";   
 
             console.log(user.Distance);
@@ -51,6 +62,7 @@ function ContentHandler (db) {
         });
 
     }
+
 
     this.displayUserDashboardPage = function(req, res, next) {
         "use strict";

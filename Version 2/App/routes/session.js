@@ -232,10 +232,11 @@ function SessionHandler (db) {
         var userID=req.username;
         var WhatILike = req.body.WhatILike;
         var Distance = req.body.Distance;
+        var profileImage = req.files.image;
         console.log(req);
     
         console.log(userID);
-        users.EditProfile(userID, WhatILike, Distance, function(err, user) {
+        users.EditProfile(userID, WhatILike, Distance,profileImage, function(err, user) {
                 "use strict";
 
                 if (err) {
