@@ -43,12 +43,12 @@
             <h1 class="navbar-brand"><b>TruckStop</b></h1>
           <!--<a class="navbar-brand" href="#"><b>TruckStop</b></a>-->
         </div>
-        <form method="post">
+        <form id="login" method="post">
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><input type="text" class="form-control form-control-header" id="exampleHeaderInputName" name="emailID" placeholder="Enter your Username"></li>
-                    <li><input type="password" class="form-control form-control-header" id="exampleHeaderInputPassword" name="passwd" placeholder="Enter your Password"></li>
-                    <li><button type="submit" class="btn btn-warning btn-header">LOGIN</button></li>
+                    <li><input type="text" class="form-control form-control-header" id="exampleHeaderInputName" name="emailID" placeholder="Username"></li>
+                    <li><input type="password" class="form-control form-control-header" id="exampleHeaderInputPassword" name="passwd" placeholder="Password"></li>
+                    <li><button type="button" class="btn btn-warning btn-header" id="btnlogin" onclick="formSubmit()">LOGIN</button></li>
                 </ul>
             </div><!--/.nav-collapse -->
         </form>
@@ -78,7 +78,7 @@
         <div class="container">
         <div class="row">
                 <a href="#signupform">
-                    <h1 style="text-align: center; margin-top: 350px; font-weight: 900">SIGN UP BELOW</h1>
+                    <h1 style="text-align: center; margin-top: 350px; font-weight: 900">CLICK HERE TO JOIN</h1>
                 </a>
             </h1>
         </div>
@@ -93,7 +93,7 @@
                     join us now.</h1>
                 <form method="post" class="form-inline" role="form">
                     <div class="form-group">
-
+                        <input type="text" class="form-control" id="exampleInputName" placeholder="Enter your First Name" name="firstName">
                         <input type="text" class="form-control" id="exampleInputLastName" placeholder="Enter your Last Name" name="lastName">
                         <input type="email" class="form-control" id="exampleInputEmail" placeholder="Enter your Email Address" name="emailAddress">
                         <input type="password" class="form-control" id="exampleInputPassword" placeholder="Enter your Password"  name="password">
@@ -116,7 +116,7 @@
                             </div>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-warning btn-lg joinbtn">JOIN NOW</button>
+                    <button type="button" class="btn btn-warning btn-lg joinbtn" onclick="joinNowSubmit()">JOIN NOW</button>
                     <input id = "latitudeText" type = "hidden" name="latitude">
                     <input id = "longitudeText" type = "hidden" name="longitude">
                 </form>
@@ -200,6 +200,51 @@
     <script src="assets/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="assets/js/modernizr.custom.86080.js"></script>
     <script type="text/javascript">
+        function formSubmit(){
+            if($("#exampleHeaderInputName").val() == "") {
+                $("#exampleHeaderInputName").addClass("errorClass");
+                $("#exampleHeaderInputName").attr('placeholder', "Incorrect UserName");
+                $("#exampleHeaderInputName").addClass("errorplaceHolder");
+
+            }
+            if($("#exampleHeaderInputPassword").val() == ""){
+                $("#exampleHeaderInputPassword").addClass("errorClass");
+                $("#exampleHeaderInputPassword").attr('placeholder', "Incorrect Password");
+                $("#exampleHeaderInputPassword").addClass("errorplaceHolder");
+            }
+            else {
+                document.forms["login"].submit();
+            }
+        }
+        function joinNowSubmit(){
+            exampleInputName
+            exampleInputLastName
+            exampleInputEmail
+            exampleInputPassword
+            if($("#exampleInputName").val() == "") {
+                $("#exampleInputName").addClass("errorClass");
+                $("#exampleInputName").attr('placeholder', "Please fill First Name");
+                $("#exampleInputName").addClass("errorplaceHolder");
+            }
+            if($("#exampleInputLastName").val() == "") {
+                $("#exampleInputLastName").addClass("errorClass");
+                $("#exampleInputLastName").attr('placeholder', "Please fill Last Name");
+                $("#exampleInputLastName").addClass("errorplaceHolder");
+            }
+            if($("#exampleInputEmail").val() == "") {
+                $("#exampleInputEmail").addClass("errorClass");
+                $("#exampleInputEmail").attr('placeholder', "Please fill Email Address");
+                $("#exampleInputEmail").addClass("errorplaceHolder");
+            }
+            if($("#exampleInputPassword").val() == "") {
+                $("#exampleInputPassword").addClass("errorClass");
+                $("#exampleInputPassword").attr('placeholder', "Please fill Password");
+                $("#exampleInputPassword").addClass("errorplaceHolder");
+            }
+            else {
+                document.forms["signupform"].submit();
+            }
+        }
         function showLocation(position) {
             var latitude = position.coords.latitude;
             var longitude = position.coords.longitude;

@@ -113,7 +113,7 @@ a:after {
 .form-control {
 	height: 42px;
 	font-size: 18px;
-	width: 300px;
+	width: 280px;
     margin-bottom: 8px;
 }
 
@@ -183,13 +183,6 @@ i {
     font-size: 50px;
     padding-bottom: 10px;
 }
-
-.control-label1{
-    color: white;
-    font-size: 20px;
-    padding-bottom: 10px;
-}
-
 .radio{
     padding-left: 0px;
 }
@@ -210,4 +203,11 @@ i {
     margin-top: 30px;
     margin-right: 18px;
     border-radius: 5px;
+}
+.errorClass{
+    border:  2px solid red;
+
+}
+.errorplaceHolder::-webkit-input-placeholder{
+    color: red;
 }
