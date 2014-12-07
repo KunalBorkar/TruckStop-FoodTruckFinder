@@ -48,6 +48,8 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li><input type="text" class="form-control form-control-header" id="exampleHeaderInputName" name="emailID" placeholder="Username"></li>
                     <li><input type="password" class="form-control form-control-header" id="exampleHeaderInputPassword" name="passwd" placeholder="Password"></li>
+                    <input id = "currentlatitude" type = "hidden" name="currentlatitude">
+                    <input id = "currentlongitude" type = "hidden" name="currentlongitude">
                     <li><button type="button" class="btn btn-warning btn-header" id="btnlogin" onclick="formSubmit()">LOGIN</button></li>
                 </ul>
             </div><!--/.nav-collapse -->
@@ -254,6 +256,10 @@
             var longi = document.getElementById('longitudeText');
             longi.value = longitude;
             //  document.forms["signupform"].submit();
+            var currentlat = document.getElementById('currentlatitude');
+            currentlat.value = latitude;
+            var currentlongi = document.getElementById('currentlongitude');
+            currentlongi.value = longitude;
         }
 
         function errorHandler(err) {

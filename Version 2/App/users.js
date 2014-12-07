@@ -118,6 +118,9 @@ function UsersDAO(db) {
     }
 
 
+
+
+
      this.EditProfile = function(userID, WhatILike, Distance,profileImage, callback) {
         
         var userprofileinfo = {$set: {'whatilike': WhatILike, 'Distance': Distance}};
@@ -135,7 +138,14 @@ function UsersDAO(db) {
         users.update(query, userprofileinfo, function(err, result){
             userImages.save(userImageInfo, function(err, result){ 
             callback(err, userprofileinfo);
+        	});
         });
+    }
+    
+    this.updateCurrentLocationforUser = function (username, currentlatitude, currentlongitude, callback) {
+        console.log("In DisplayWelcome Users current lat and longi are:"+ currentlatitude +" "+ currentlongitude );
+        users.update({'_id':username}, {$set:{'latitude':currentlatitude, 'longitude': currentlongitude}}, function(err, user){
+            callback(err, user);
         });
     }
 

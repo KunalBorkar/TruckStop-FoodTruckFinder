@@ -34,6 +34,11 @@ function SessionHandler (db) {
 	var radio = req.body.truckOwner;
     var latitude = req.body.latitude;
     var longitude = req.body.longitude;
+    var currentLatitude = req.body.currentlatitude;
+    var currentLongitude = req.body.currentlongitude;
+    console.log(req.body);
+	
+	console.log(radio);
 	
 	var emailID = req.body.emailID;
 	var passwd = req.body.passwd;
@@ -51,7 +56,7 @@ function SessionHandler (db) {
             if (err) {
 			
                 if (err.no_such_user) {
-                    return res.render("login", {emailID:username, passwd:"", username_error:"No such user"});
+                    return res.render("FirstPage", {emailID:username, passwd:"", username_error:"No such user"}); //changed 'login' to 'FirstPage'
                 }
                 else if (err.invalid_password) {
                     return res.render("FirstPage", {emailID:username, passwd:"", login_error:"Invalid password"});
@@ -73,10 +78,13 @@ function SessionHandler (db) {
 				{
 					return res.redirect('/truckUserDashboard');
 				}
-				else
-				{
-					return res.redirect('/userDashboard');
-				}
+				else {
+                    console.log("In DisplayWelcome Users current lat and longi are:"+ latitude +" "+ longitude );
+                    users.updateCurrentLocationforUser(req.username, currentLatitude, currentLongitude, function (err, user) {
+                        "use strict";
+                        return res.redirect('/userDashboard');
+                    });
+                }
             });
         });
 
