@@ -183,11 +183,6 @@ i {
     font-size: 50px;
     padding-bottom: 10px;
 }
-.control-label1{
-    color: white;
-    font-size: 20px;
-    padding-bottom: 10px;
-}
 .radio{
     padding-left: 0px;
 }
@@ -213,6 +208,15 @@ i {
     border:  2px solid red;
 
 }
+.control-label1{
+    color: white;
+    font-size: 20px;
+    padding-bottom: 10px;
+}
 .errorplaceHolder::-webkit-input-placeholder{
     color: red;
+}
+
+#mapdiv{
+    margin-top: -100px;
 }
