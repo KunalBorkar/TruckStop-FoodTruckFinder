@@ -175,9 +175,6 @@ i {
     background-color: black;
     border-color: lightseagreen;
 }
-.btn-warning{
-
-}
 .control-label{
     color: white;
     font-size: 50px;
@@ -206,12 +203,15 @@ i {
 }
 .errorClass{
     border:  2px solid red;
-
 }
 .control-label1{
     color: white;
     font-size: 20px;
     padding-bottom: 10px;
+    text-align: justify;
+    font-weight: bolder;
+    font-family: "Helvetica Neue Light", "Lucida Grande", "Calibri", "Arial", sans-serif;
+    margin-left: 150px;
 }
 .errorplaceHolder::-webkit-input-placeholder{
     color: red;
@@ -219,4 +219,17 @@ i {
 
 #mapdiv{
     margin-top: -100px;
+}
+
+.mapdiv{
+    margin-top: -20px;
+}
+
+.day {
+     height: 25px;
+}
+
+#label {
+    float: left;
+    min-width: 100px;
 }
