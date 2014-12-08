@@ -1,6 +1,7 @@
+<!DOCTYPE html>
 <html>
 <head>
-    <title>Your Profile</title>
+	<title>Create your profile: truck owner</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -58,44 +59,29 @@
         <li><span>Image 06</span><div><h3> </h3></div></li>
     </ul>
 
-    <div class="container">
-        <div class="row">
-            <a href="#genuserprofile">
-                <h1 style="text-align: center; margin-top: 350px; font-weight: 900">MY PROFILE</h1>
-            </a>
-            </h1>
+    <div id="mapdiv" class="container">
+        <div class="row mt centered">
+            <div class="col-lg-6 col-lg-offset-3">
+                <form method="post" class="control-label" role="form">
+                    <div class="form-group">
+                        <h1 class="control-label">MY PROFILE</h1>
+                        <!--<h1 class="control-label" style="text-align: center; font-weight: bolder;">MY PROFILE</h1>-->
+                        <h4 class="control-label1">Name : {{firstName}} {{lastName}}</h4>
+                        <h4 class="control-label1">Email Address: {{EmailAddress}}</h4>
+                        <h4 class="control-label1">Your choices:</h4>
+                        <h4 class="control-label1">Cuisines I like: {{WhatILike}}</h4>
+                        <h4 class="control-label1">Notify when food truck is within : {{Distance}}</h4>
+                        <button type="button" class="btn btn-warning btn-lg joinbtn">EDIT</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
-</div>
-<div id="genuserprofile" class="container">
-    <div class="row mt centered">
-        <div class="col-lg-6 col-lg-offset-3">
-            <form method="post" class="control-label1" role="form">
-                <div class="form-group">
-
-                    <h4 class="control-label1">Name : {{firstName}} {{lastName}}</h4>
-					<br/>
-                    <h4 class="control-label1">Email Address: {{EmailAddress}}</h4>
-					<br/>
-                    <h4 class="control-label1">Your choices:</h4>
-				    <br/>
-                    <h4 class="control-label1">Cuisines I like: {{WhatILike}}</h4>
-			    	<br/>
-                    <h4 class="control-label1">Notify when food truck is within : {{Distance}}</h4>
-					<br/>
-					<br/>
-                    <button type="submit" class="btn btn-warning btn-lg joinbtn">HOME</button>
-            </form>
-        </div>
-    </div>
-</div>
 </div>
 
 <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
 <script src="assets/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="assets/js/modernizr.custom.86080.js"></script>
 
-
-	</body>
-
+</body>
 </html>

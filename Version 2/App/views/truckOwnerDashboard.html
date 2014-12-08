@@ -1,12 +1,14 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Your Profile</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="shortcut icon" href="assets/img/favicon.png">
+
+    <title>Truck User DashBoard</title>
 
     <link rel="stylesheet" type="text/css" href="assets/css/demo.css" />
     <link rel="stylesheet" type="text/css" href="assets/css/style1.css" />
@@ -25,6 +27,8 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
+
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
 </head>
 <body>
 <div class="navbar navbar-default navbar-fixed-top">
@@ -57,30 +61,32 @@
         <li><span>Image 05</span><div><h3></h3></div></li>
         <li><span>Image 06</span><div><h3></h3></div></li>
     </ul>
-
     <div id="mapdiv" class="container">
-        <div class="row mt centered">
-            <div class="col-lg-6 col-lg-offset-3">
-                <form method="post" class="control-label" role="form">
-                    <div class="form-group">
-                        <h1 class="control-label">MY PROFILE</h1>
-                        <!--<h1 class="control-label" style="text-align: center; font-weight: bolder;">MY PROFILE</h1>-->
-                        <h4 class="control-label1">Name : {{firstName}} {{lastName}}</h4>
-                        <h4 class="control-label1">Email Address: {{EmailAddress}}</h4>
-                        <h4 class="control-label1">Your choices:</h4>
-                        <h4 class="control-label1">Cuisines I like: {{WhatILike}}</h4>
-                        <h4 class="control-label1">Notify when food truck is within : {{Distance}}</h4>
-                        <button type="button" class="btn btn-warning btn-lg joinbtn">EDIT</button>
-                    </div>
+        <div class="row">
+            <div class="col-lg-3">
+                <h1 class="control-label">Subscriptions</h1>
+                <form method="post" class="form-inline" role="form" action="/subscriptions">
+                    <button type="button" class="btn btn-warning btn-lg joinbtn" value="Manage Subscriptions">MANAGE SUBSCRIPTIONS
+                    </button>
                 </form>
+                <ul>
+                    {% for userSubscription in userSubscriptions %}
+                    <li>
+                        <a href="foodtruck/{{userSubscription}}"> {{ userSubscription }} </a>
+                    </li>
+                    <br/>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="col-lg-6">
+                <h1 class="control-label">Currently Around You</h1>
+                <div id="map-canvas" style="width: 600px; height: 400px"></div>
+            </div>
+            <div class="col-lg-1">
+                <h1 class="control-label">Recommendations</h1>
             </div>
         </div>
     </div>
 </div>
-
-<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-<script src="assets/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="assets/js/modernizr.custom.86080.js"></script>
-
 </body>
 </html>

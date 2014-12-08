@@ -1,6 +1,6 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Your Profile</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,8 +8,11 @@
     <meta name="author" content="">
     <link rel="shortcut icon" href="assets/img/favicon.png">
 
+    <title>Welcome to TruckStop</title>
+    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap-tagsinput.css">
     <link rel="stylesheet" type="text/css" href="assets/css/demo.css" />
     <link rel="stylesheet" type="text/css" href="assets/css/style1.css" />
+
 
     <!-- Bootstrap core CSS -->
     <link href="assets/css/bootstrap.css" rel="stylesheet">
@@ -19,6 +22,7 @@
 
     <!-- Fonts from Google Fonts -->
     <link href='http://fonts.googleapis.com/css?family=Lato:300,400,900' rel='stylesheet' type='text/css'>
+
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -57,30 +61,65 @@
         <li><span>Image 05</span><div><h3></h3></div></li>
         <li><span>Image 06</span><div><h3></h3></div></li>
     </ul>
-
     <div id="mapdiv" class="container">
-        <div class="row mt centered">
-            <div class="col-lg-6 col-lg-offset-3">
-                <form method="post" class="control-label" role="form">
-                    <div class="form-group">
-                        <h1 class="control-label">MY PROFILE</h1>
-                        <!--<h1 class="control-label" style="text-align: center; font-weight: bolder;">MY PROFILE</h1>-->
-                        <h4 class="control-label1">Name : {{firstName}} {{lastName}}</h4>
-                        <h4 class="control-label1">Email Address: {{EmailAddress}}</h4>
-                        <h4 class="control-label1">Your choices:</h4>
-                        <h4 class="control-label1">Cuisines I like: {{WhatILike}}</h4>
-                        <h4 class="control-label1">Notify when food truck is within : {{Distance}}</h4>
-                        <button type="button" class="btn btn-warning btn-lg joinbtn">EDIT</button>
-                    </div>
-                </form>
+        <div class="row">
+            <div class="col-lg-6">
+                <h1 class="control-label">What are you serving today?</h1>
+                    <form method="post" class="form-inline" role="form">
+                        <textarea name="todaysMenu" class="form-control" data-role="tagsinput" placeholder="Today's Menu" rows="4" cols="10"></textarea>
+                        <textarea name="todaysMenuTags" class="form-control" placeholder="Menu Tags" rows="4" cols="10"></textarea>
+                        <br>
+                        <button type="button" class="btn btn-warning btn-lg joinbtn">STORE MENU</button>
+                    </form>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div id="map-canvas" style="width: 600px; height: 400px"></div>
             </div>
         </div>
     </div>
 </div>
 
+
+<!-- Bootstrap core JavaScript
+  ================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
 <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
 <script src="assets/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="assets/js/modernizr.custom.86080.js"></script>
+<script src="assets/js/bootstrap-tagsinput.js"></script>
+<script type="text/javascript">
+    $( document ).ready(function() {
 
-</body>
+    });
+</script>
+<!--<h1>-->
+			<!--Dashboard-->
+		<!--</h1>-->
+		<!--<br/>-->
+		<!--<label>-->
+			<!--What are you serving today?-->
+		<!--</label>-->
+		<!--<br/>-->
+		<!--<form method="post">-->
+		<!--<textarea rows="4" cols="50" name="todaysMenu">-->
+		<!--</textarea>-->
+		<!--<br/>-->
+		<!--<label>-->
+			<!--Serve as Tags!!-->
+		<!--</label>-->
+		<!--<br/>-->
+		<!--<form method="post">-->
+			<!--<textarea rows="4" cols="50" name="todaysMenuTags">-->
+			<!--</textarea>-->
+			<!--<br/>-->
+			<!--<input type="submit" value="Tag It!!">-->
+		<!--</form>-->
+		<!--<form action="/truckUserDashboard">-->
+			<!--<input type="submit" value="Home"/>-->
+		<!--</form>-->
+		<!--<form action="/logout">-->
+			<!--<input type="submit" value="Logout"/>-->
+		<!--</form>-->
+	</body>
 </html>
