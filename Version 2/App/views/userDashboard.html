@@ -68,7 +68,19 @@
         <div id="mapdiv" class="container">
             <div class="row">
                 <div class="col-lg-3">
-                    <h1 class="control-label">fsdfsdds</h1>
+                    <h1 class="control-label">Subscriptions</h1>
+                    <form method="post" class="form-inline" role="form" action="/subscriptions">
+                        <button type="button" class="btn btn-warning btn-lg joinbtn" value="Manage Subscriptions">MANAGE SUBSCRIPTIONS
+                        </button>
+                    </form>
+                    <ul>
+                        {% for userSubscription in userSubscriptions %}
+                        <li>
+                            <a href="foodtruck/{{userSubscription}}"> {{ userSubscription }} </a>
+                        </li>
+                        <br/>
+                        {% endfor %}
+                    </ul>
                 </div>
                 <div class="col-lg-6">
                     <h1 class="control-label">Currently Around You</h1>
@@ -80,8 +92,14 @@
             </div>
         </div>
     </div>
-<!-- Bootstrap core JavaScript
-  ================================================== -->
+<div class="container">
+        <hr>
+        <p class="footer centered" style="font-weight: bolder;">©2014 TruckStop &nbsp; &nbsp;Created by sAaPkUnUvA</p>
+        <p class="footer centered" style="font-weight: bolder;"></p>
+</div><!-- /container -->
+
+    <!-- Bootstrap core JavaScript
+      ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
 <script src="assets/js/bootstrap.min.js"></script>
