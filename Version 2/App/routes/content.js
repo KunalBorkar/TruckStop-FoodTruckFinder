@@ -1,5 +1,6 @@
 var sanitize = require('validator').sanitize; // Helper to sanitize form input
 var UsersDAO = require('../users').UsersDAO;
+var distance = require('google-distance-matrix');
 
 /* The ContentHandler must be constructed with a connected db */
 function ContentHandler (db) {
@@ -79,10 +80,28 @@ function ContentHandler (db) {
                 }
             }
 
-            users.getTrucks(4, function(err, results) {
-                "use strict";
-
+            users.getTrucks(5,user.latitude, user.longitude, function(err, results) {
+/*                "use strict";
                 if (err) return next(err);
+                var finalArray = [];
+                results.forEach(function(value) {
+                    console.log("Inside for each loop "+ value);
+                    finalArray.push(value);
+
+                    var origins = [user.latitude+','+user.longitude];
+                    var destinations = [value.latitude+','+value.longitude];
+                    console.log(origins);
+                    distance.units('imperial');
+                    distance.matrix(origins, destinations, function (err, distances) {
+                        if (!err)
+                            console.log(distances.rows[0].elements[0].distance.value);
+                            var distanceValue = distances.rows[0].elements[0].distance.value;
+                            if(distanceValue > 6700){
+                                finalArray.push(value);
+                            }
+                    });
+                });*/
+                console.log("Printing results Array "+results);
                 return res.render("userDashboard", {'latitude': user.latitude, 'longitude': user.longitude, 'locations':results})
             });
         });

@@ -284,5 +284,89 @@ function SessionHandler (db) {
 			return res.render("index2", {'foodTruckName': user._id, 'licenseNumber': user.license_number, 'specialityCuisine': user.speciality_cuisine, 'operatingHours': user.operatin_hours, 'aboutMe': user.about_me})
 	});
 	}
+//searchTrucksForUser function...logic not working hence trying new logic.
+/*    this.searchTrucksForUser = function (req, res, next) {
+        "use strict";
+        console.log("Inside SearchTruckForUser");
+        var userID = req.username;
+        var searchString = req.body.searchbar;
+
+        var words = searchString.split(" ");
+        console.log("Printing words Array " + words)
+        users.findLocation(userID,function(err,user){
+            users.searchTrucksForUserWithDistanceAndTags(userID, words, function (err, results){
+                console.log("Printing results Array "+results);
+//                return res.render("userDashboard", {'latitude': user.latitude, 'longitude': user.longitude, 'locations':results})
+                return res.redirect("/truckUserDashboard");
+            });
+            console.log("Printing users "+user);
+
+        });
+*//*        users.addTruckUserProfile(userID, foodTruckName, licenseNumber, specialityCuisine, operatingHours, aboutMe, profileImage, function(err, user) {
+            "use strict";
+
+            if (err) {
+                // this was a duplicate
+                if (err.code == '11000') {
+                    errors['email_error'] = "This Email Address is already Signed Up!!";
+                    return res.render("truckstop", errors);
+                }
+                // this was a different error
+                else {
+                    return next(err);
+                }
+            }
+
+            return res.redirect("/truckUserDashboard");
+        });*//*
+      //  return res.redirect("/truckUserDashboard");
+    }*/
+
+    this.searchTrucksForUser = function (req, res, next) {
+        "use strict";
+        console.log("Inside SearchTruckForUser");
+        var userID = req.username;
+        var searchString = req.body.searchbar;
+
+        var words = searchString.split(" ");
+        console.log("Printing words Array " + words)
+        users.findLocation(userID,function(err,user){
+            users.getTrucks(100,user.latitude,user.longitude, function(err,results){
+                var count = 0;
+                var finalArray = [];
+                results.forEach(function (doc) {
+                    console.log("Printing document inside results forEach loop " + doc)
+                    var tagsString = doc.todaysTags;
+                    console.log("Printing tagString inside results forEach loop " + tagsString);
+                    var menuString = doc.todaysMenu;
+                    console.log("Printing tagString inside results forEach loop " + menuString);
+                    var isTruckAddedOnce = false;
+                    words.forEach(function (keyword) {
+                        if (tagsString.indexOf(keyword) > 0 && isTruckAddedOnce == false) {
+                            finalArray.push(doc);
+                            console.log("Printing document name that has been pushed into final Array " + doc.name);
+                            isTruckAddedOnce = true;
+                            console.log("Printing final Array inside for Each " + finalArray);
+                        }
+                        else if (menuString.indexOf(keyword) > 0 && isTruckAddedOnce == false) {
+                            finalArray.push(doc);
+                            isTruckAddedOnce = true;
+                            console.log("Printing document name that has been pushed into final Array " + doc.name);
+                            console.log("Printing final Array inside for Each " + finalArray);
+                        }
+                        count++;
+                        console.log("Printing count " + count);
+                        console.log("Printing count of words" + words.length);
+                        console.log("Printing count of results" + results.length);
+                        if (count == (words.length * results.length)) {
+                            console.log("Printing  inside the count if loop final Array " + finalArray);
+                            return res.render("userDashboard", {'latitude': user.latitude, 'longitude': user.longitude, 'locations':finalArray})
+                        }
+                    });
+                    //callback1(err,finalArray);
+                });
+            });
+        });
+    }
 }
 module.exports = SessionHandler;

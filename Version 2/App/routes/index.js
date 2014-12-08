@@ -48,6 +48,7 @@ module.exports = exports = function(app, db) {
 
     //request to navigate to User's Dash Board
     app.get("/userDashboard", contentHandler.displayUserDashboardPage);
+    app.post("/userDashboard", sessionHandler.searchTrucksForUser);
 
     // Error handling middleware
     app.use(ErrorHandler);

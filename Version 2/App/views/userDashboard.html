@@ -46,9 +46,12 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li><button type="submit" class="btn btn-warning btn-header">LOGOUT</button></li>
                 </ul>
-                <ul class="nav navbar-nav navbar-left">
-                    <li><input type="text" class="form-control-header-rounded col-lg-push-1" placeholder="Search"></li>
-                </ul>
+				<form id="searchForm" method="post">
+					<ul class="nav navbar-nav navbar-left">
+						<li><input type="text" class="form-control-header-rounded col-lg-push-1" placeholder="Search" id="searchbar" name="searchbar"></li>
+						<li><button type="submit" class="btn btn-warning btn-header">SEARCH</button></li>
+					</ul>
+				</form>
             </div><!--/.nav-collapse -->
         </div>
     </div>
@@ -102,7 +105,7 @@
                 title: 'Currently you are here'
             });
             google.maps.event.addListener(marker1, 'click', function() {
-                infowindow1.setContent("Currently you are here");
+                infowindow1.setContent('<h3>'+ 'TestingLink'+'</h3>'+'<a href="http://stackoverflow.com/questions/6749104/opening-a-webpage-in-lightbox">'+'TestingLink'+'</a>');
                 infowindow1.open(map,marker1);
             });
 

@@ -1,7 +1,7 @@
 var bcrypt = require('bcrypt-nodejs')
 	, MongoDb = require("mongodb")
 	, fs = require("fs");
-
+var distance = require('google-distance-matrix');
 /* The UsersDAO must be constructed with a connected database object */
 function UsersDAO(db) {
     "use strict";
@@ -103,7 +103,7 @@ function UsersDAO(db) {
     }
 */
 
-    this.getTrucks = function(num, callback) {
+    this.getTrucks = function(num,userLatitude, userLongitude, callback) {
         "use strict";
 
         trucks.find().sort('_id', -1).limit(num).toArray(function(err, items) {
@@ -112,10 +112,84 @@ function UsersDAO(db) {
             if (err) return callback(err, null);
 
             console.log("Found " + items.length + " posts");
+            console.log("Result " + items);
 
-            callback(err, items);
+            var finalArray = [];
+            var count = 0;
+            items.forEach(function(value) {
+                console.log("Inside for each loop "+ value);
+                //finalArray.push(value);
+
+                var origins = [userLatitude+','+userLongitude];
+                var destinations = [value.latitude+','+value.longitude];
+                console.log(origins);
+                distance.units('imperial');
+                distance.matrix(origins, destinations, function (err, distances) {
+                    if (!err)
+                        console.log(distances.rows[0].elements[0].distance.value);
+                    var distanceValue = distances.rows[0].elements[0].distance.value;
+                    console.log(value.name + " has a distance of " + distanceValue);
+                    if(distanceValue < 6700){
+                        console.log("Printing distance value "+distanceValue)
+                        finalArray.push(value);
+                        console.log("Prinitng finalArray inside if loop " + finalArray)
+                    }
+                    count++
+                    console.log("Printing count " +count);
+                    console.log("Printing lenght of items array "+ items.length.toString());
+                    if(count==items.length){
+                        console.log("Printing final Array "+ finalArray);
+                        callback(err, finalArray);
+                    }
+                });
+            });
         });
     }
+/*
+
+    this.searchTrucksForUserWithDistance = function(username,tagsToSearch, callback) {
+        "use strict";
+        this.findLocation(username, function(err, user) {
+            var finalArray = [];
+            trucks.find().toArray(function (err, docs) {
+                "use strict";
+                var count=0;
+                docs.forEach(function (doc) {
+                    if (doc != null) {
+                        console.log("Printing all the documents in Trucks Table " + doc);
+                        var origins = [user.latitude + ',' + user.longitude];
+                        var destinations = [doc.latitude + ',' + doc.longitude];
+                        console.log(origins);
+                        distance.units('imperial');
+                        distance.matrix(origins, destinations, function (err, distances) {
+                            if (!err)
+                                console.log(distances.rows[0].elements[0].distance.value);
+                            var distanceValue = distances.rows[0].elements[0].distance.value;
+                            if (distanceValue < 6700) {
+                                console.log("Printing distance value " + distanceValue)
+                                var tagsString = doc.todaysTags;
+                                var menuString = doc.todaysMenu;
+                                var isTruckAddedOnce = false;
+                                tagsToSearch.forEach(function (keyword) {
+                                    if (tagsString.match(keyword) > 0 && isTruckAddedOnce == false) {
+                                        finalArray.push(doc);
+                                        isTruckAddedOnce = true;
+                                    }
+                                    else if (menuString.match(keyword) > 0 && isTruckAddedOnce == false) {
+                                        finalArray.push(doc);
+                                        isTruckAddedOnce = true;
+                                    }
+                                });
+                                count++;
+                                console.log("Prinitng final Array " + finalArray)
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    }
+*/
 
 
 
@@ -143,12 +217,46 @@ function UsersDAO(db) {
     }
     
     this.updateCurrentLocationforUser = function (username, currentlatitude, currentlongitude, callback) {
-        console.log("In DisplayWelcome Users current lat and longi are:"+ currentlatitude +" "+ currentlongitude );
-        users.update({'_id':username}, {$set:{'latitude':currentlatitude, 'longitude': currentlongitude}}, function(err, user){
+        console.log("In DisplayWelcome Users current lat and longi are:" + currentlatitude + " " + currentlongitude);
+        users.update({'_id': username}, {$set: {'latitude': currentlatitude, 'longitude': currentlongitude}}, function (err, user) {
             callback(err, user);
         });
     }
 
+    this.getTrucksByTags = function (words, results, callback1) {
+        "use strict";
+        var count = 0;
+        var finalArray = [];
+        results.forEach(function (doc) {
+            console.log("Printing document inside results forEach loop " + doc)
+            var tagsString = doc.todaysTags;
+            console.log("Printing tagString inside results forEach loop " + tagsString);
+            var menuString = doc.todaysMenu;
+            console.log("Printing tagString inside results forEach loop " + menuString);
+            var isTruckAddedOnce = false;
+            words.forEach(function (keyword) {
+                if (tagsString.indexOf(keyword) > 0 && isTruckAddedOnce == false) {
+                    finalArray.push(doc);
+                    isTruckAddedOnce = true;
+                    console.log("Printing final Array inside for Each " + finalArray);
+                }
+                else if (menuString.indexOf(keyword) > 0 && isTruckAddedOnce == false) {
+                    finalArray.push(doc);
+                    isTruckAddedOnce = true;
+                    console.log("Printing final Array inside for Each " + finalArray);
+                }
+                count++;
+                console.log("Printing count " + count);
+                console.log("Printing count of words" + words.length);
+                console.log("Printing count of results" + results.length);
+                if (count == (words.length * results.length)) {
+                    console.log("Printing  inside the count if loop final Array " + finalArray);
+                    callback1(err,finalArray);
+                }
+            });
+            callback1(err,finalArray);
+        });
+    }
 
 }
 
