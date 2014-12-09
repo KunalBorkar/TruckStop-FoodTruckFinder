@@ -1,42 +1,141 @@
 <html>
 	<head>
 		<title>
-			Subscription
+			Manage your Subscriptions
 		</title>
-		<script>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <link rel="shortcut icon" href="assets/img/favicon.png">
+
+        <title>User Dashboard</title>
+
+        <link rel="stylesheet" type="text/css" href="assets/css/demo.css" />
+        <link rel="stylesheet" type="text/css" href="assets/css/style1.css" />
+
+        <!-- Bootstrap core CSS -->
+        <link href="assets/css/bootstrap.css" rel="stylesheet">
+
+        <!-- Custom styles for this template -->
+        <link href="assets/css/main.css" rel="stylesheet">
+
+        <!-- Fonts from Google Fonts -->
+        <link href='http://fonts.googleapis.com/css?family=Lato:300,400,900' rel='stylesheet' type='text/css'>
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+
+        <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+			<script>
+
 			function myfunc(element) {
 				var tempUserSubscription = document.getElementById('subscription');
 				tempUserSubscription.value = element.name;
 				document.forms["userSubscriptionForm"].submit();
 			}
-		</script>
+
+            function returnBack()
+           {
+
+            }
+
+           </script>
 	</head>
+
 	<body>
-		<h1>
-			Manage Your Subscriptions!!
-		</h1>
-		<p>
-			{{ noSubscription }}
-		</p>
-		<form action="/searchFoodTrucks">
-			<input type="submit" value="Add New Subscriptions"/>
-		</form>
-		<ul>
-			{% for userSubscription in userSubscriptions %}
+
+    <div class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <h1 class="navbar-brand"><b>TruckStop</b></h1>
+                <!--<a class="navbar-brand" href="#"><b>TruckStop</b></a>-->
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><button type="submit" class="btn btn-warning btn-header" onclick="returnBack()">LOGOUT</button></li>
+                </ul>
+                <form id="searchForm" method="post">
+                    <ul class="nav navbar-nav navbar-left">
+                        <li><input type="text" class="form-control-header-rounded col-lg-push-1" placeholder="Search" id="searchbar" name="searchbar"></li>
+                        <li><button type="submit" class="btn btn-warning btn-header">SEARCH</button></li>
+                    </ul>
+                </form>
+            </div><!--/.nav-collapse -->
+        </div>
+    </div>
+
+    <div id="headerwrap">
+        <ul class="cb-slideshow">
+            <li><span>Image 01</span><div><h3></h3></div></li>
+            <li><span>Image 02</span><div><h3></h3></div></li>
+            <li><span>Image 03</span><div><h3></h3></div></li>
+            <li><span>Image 04</span><div><h3></h3></div></li>
+            <li><span>Image 05</span><div><h3></h3></div></li>
+            <li><span>Image 06</span><div><h3></h3></div></li>
+        </ul>
+        <div id="mapdiv" class="container">
+        <div class="row">
+            <div class="col-lg-2">
+                </div>
+            <div class="col-lg-8">
+                <form id="subscription" method="post" class="form-inline">
+                    <div class="form-group">
+
+            <h1 class="control-label">Manage Your Subscriptions!</h1>
+                <form method="post" class="form-inline" role="form" action="/subscriptions">
+    		<p><h3 class="control-label1">{{ noSubscription }}</h3></p>
+            <form action="/searchFoodTrucks">
+             <button id="btnsignup" type="button" class="btn btn-warning btn-lg joinbtn"><!--onclick="add subscription function"--> ADD NEW SUBSCRIPTION</button>
+                <!--
+                <input type="submit" class="btn btn-warning btn-lg joinbtn" value="Add New Subscriptions"/>-->
+            </form>
+
+             <ul>
+                 <h3 class="control-label1">{% for userSubscription in userSubscriptions %}
+
 				<li>
-					{{ userSubscription }} <input type="button" value="Unsubscribe" name={{ userSubscription }} onclick="myfunc(this)"/> </form>
+					<br>{{ userSubscription }} <button id="btnsignup" type="button" class="btn btn-warning btn-lg joinbtn" name={{userSubscription}] onclick="myfunc(this)">UNSUBSCRIBE</button>
+                    <!--<input type="button" value="Unsubscribe" name={{ userSubscription }} onclick="myfunc(this)"/>-->
+
 				</li>
 				<br/>
 			{% endfor %}
 		</ul>
+
 		<form method="post" id="userSubscriptionForm">
 			<input id="subscription" type="hidden" name="userSubscription">
 		</form>
 		<form action="/truckOwnerDashboard">
-			<input type="submit" value="Home"/>
+            <button id="btnsignup" type="button" class="btn btn-warning btn-lg joinbtn">HOME</button>
+            </h3>
+			<!--<input type="submit" value="Home"/>-->
 		</form>
-		<form action="/logout">
-			<input type="submit" value="Logout"/>
-		</form>	
-	</body>
+
+
+            </div>
+            </div>
+            </div>
+                <div class="container">
+                    <hr>
+                    <p class="footer centered" style="font-weight: bolder;">©2014 TruckStop &nbsp; &nbsp;Created by sAaPkUnUvA</p>
+                    <p class="footer centered" style="font-weight: bolder;"></p>
+                </div><!-- /container -->
+        <!-- Bootstrap core JavaScript
+          ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+        <script src="assets/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="assets/js/modernizr.custom.86080.js"></script>
+
+    </body>
 </html>
