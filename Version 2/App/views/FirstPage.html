@@ -79,11 +79,7 @@
     </ul>
     <div class="container">
         <div class="row">
-<<<<<<< HEAD
             <a href="#signupdiv">
-=======
-            <a href="#signupform">
->>>>>>> origin/master
                 <h1 style="text-align: center; margin-top: 250px; font-weight: 900">CLICK HERE TO JOIN</h1>
             </a>
             </h1>
@@ -91,21 +87,13 @@
     </div>
 </div><!-- /headerwrap -->
 
-<<<<<<< HEAD
 <div id="signupdiv" class="container">
-=======
-<div id="signupform" class="container">
->>>>>>> origin/master
     <div class="row mt centered">
         <div class="col-lg-6 col-lg-offset-3">
             <br>
             <h1 class="control-label">Don't have an account,<br/>
                 join us now.</h1>
-<<<<<<< HEAD
             <form id="signupform" method="post" class="form-inline" role="form">
-=======
-            <form method="post" class="form-inline" role="form">
->>>>>>> origin/master
                 <div class="form-group">
                     <input type="text" class="form-control" id="exampleInputName" placeholder="Enter your First Name" name="firstName">
                     <input type="text" class="form-control" id="exampleInputLastName" placeholder="Enter your Last Name" name="lastName">
@@ -221,13 +209,6 @@
         }
     }
     function joinNowSubmit(){
-<<<<<<< HEAD
-=======
-        exampleInputName
-        exampleInputLastName
-        exampleInputEmail
-        exampleInputPassword
->>>>>>> origin/master
         if($("#exampleInputName").val() == "") {
             $("#exampleInputName").addClass("errorClass");
             $("#exampleInputName").attr('placeholder', "Please fill First Name");
@@ -255,18 +236,10 @@
     function showLocation(position) {
         var latitude = position.coords.latitude;
         var longitude = position.coords.longitude;
-<<<<<<< HEAD
-=======
-        //alert("Latitude : " + latitude + " Longitude: " + longitude);
->>>>>>> origin/master
         var lat = document.getElementById('latitudeText');
         lat.value = latitude;
         var longi = document.getElementById('longitudeText');
         longi.value = longitude;
-<<<<<<< HEAD
-=======
-        //  document.forms["signupform"].submit();
->>>>>>> origin/master
         var currentlat = document.getElementById('currentlatitude');
         currentlat.value = latitude;
         var currentlongi = document.getElementById('currentlongitude');
@@ -290,11 +263,7 @@
                     options);
 
         }else{
-<<<<<<< HEAD
 //            alert("Sorry, browser does not support geolocation!");
-=======
-            alert("Sorry, browser does not support geolocation!");
->>>>>>> origin/master
         }
     }
 </script>

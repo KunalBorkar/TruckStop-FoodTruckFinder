@@ -28,7 +28,7 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
 </head>
-<body>
+<body onpageshow="getLocation()">
     <div class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -43,10 +43,8 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li><button type="submit" class="btn btn-warning btn-header">LOGOUT</button></li>
-                </ul>
-                <ul class="nav navbar-nav navbar-left">
-                    <li><input type="text" class="form-control-header-rounded col-lg-push-1" placeholder="Search"></li>
-                    <li><button type="submit" class="btn btn-warning btn-header">SEARCH</button></li>
+                    <input id = "currentlatitude" type = "hidden" name="currentlatitude">
+                    <input id = "currentlongitude" type = "hidden" name="currentlongitude">
                 </ul>
             </div><!--/.nav-collapse -->
         </div>
@@ -75,8 +73,6 @@
                                 <div id="Weekday" class="day"></div>
                                 <h5 class="control-label1" style="margin-left:65px">Weekends</h5>
                                 <div id="Weekend" class="day"></div>
-                              <!--  <input id = "weekdayTime" type = "hidden" name="weekdayTime">
-                                <input id = "weekendTime" type = "hidden" name="weekendTime">-->
                             </div>
                             <textarea id="foodTruckAboutMe" rows="4" cols="50" name="AboutMe" class="form-control" placeholder="About me"></textarea>
                             <input type="file" name="image" class="form-control">
@@ -156,7 +152,6 @@
             $("#foodTruckName").addClass("errorClass");
             $("#foodTruckName").attr('placeholder', "Please provide food-truck name");
             $("#foodTruckName").addClass("errorplaceHolder");
-
         }
         if($("#foodTruckLicenseNo").val() == ""){
             $("#foodTruckLicenseNo").addClass("errorClass");
@@ -189,14 +184,75 @@
             var weekendAMPMTo = document.getElementsByName('WeekendToAP').value;
 
             var weekdayTiming = weekdayHoursFrom + weekdayMinutesFrom + weekdayAMPMFrom + "To" + weekdayHoursTo + weekdayMinutesTo + weekdayAMPMTo
-
             var weekendTiming = weekendHoursFrom + weekendMinutesFrom + weekendAMPMFrom + "To" + weekendHoursTo + weekendMinutesTo + weekendAMPMTo
 
-            /*document.getElementsById('weekdayTime').value = weekdayTiming;
-            alert(weekdayTiming);
-            document.getElementsById('weekendTime').value = weekendTiming;
-            alert(weekendTiming);*/
             document.forms["signUp"].submit();
+        }
+        function showLocation(position) {
+            var latitude = position.coords.latitude;
+            var longitude = position.coords.longitude;
+            var lat = document.getElementById('latitudeText');
+            lat.value = latitude;
+            var longi = document.getElementById('longitudeText');
+            longi.value = longitude;
+            var currentlat = document.getElementById('currentlatitude');
+            currentlat.value = latitude;
+            var currentlongi = document.getElementById('currentlongitude');
+            currentlongi.value = longitude;
+        }
+
+        function errorHandler(err) {
+            if(err.code == 1) {
+                alert("Error: Access is denied!");
+            }else if( err.code == 2) {
+                alert("Error: Position is unavailable!");
+            }
+        }
+        function getLocation(){
+
+            if(navigator.geolocation){
+                // timeout at 60000 milliseconds (60 seconds)
+                var options = {timeout:60000};
+                navigator.geolocation.getCurrentPosition(showLocation,
+                        errorHandler,
+                        options);
+
+            }else{
+//            alert("Sorry, browser does not support geolocation!");
+            }
+        }
+    }
+    function showLocation(position) {
+        var latitude = position.coords.latitude;
+        var longitude = position.coords.longitude;
+        var lat = document.getElementById('latitudeText');
+        lat.value = latitude;
+        var longi = document.getElementById('longitudeText');
+        longi.value = longitude;
+        var currentlat = document.getElementById('currentlatitude');
+        currentlat.value = latitude;
+        var currentlongi = document.getElementById('currentlongitude');
+        currentlongi.value = longitude;
+    }
+
+    function errorHandler(err) {
+        if(err.code == 1) {
+            alert("Error: Access is denied!");
+        }else if( err.code == 2) {
+            alert("Error: Position is unavailable!");
+        }
+    }
+    function getLocation(){
+
+        if(navigator.geolocation){
+            // timeout at 60000 milliseconds (60 seconds)
+            var options = {timeout:60000};
+            navigator.geolocation.getCurrentPosition(showLocation,
+                    errorHandler,
+                    options);
+
+        }else{
+//            alert("Sorry, browser does not support geolocation!");
         }
     }
 </script>
