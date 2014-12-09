@@ -34,12 +34,11 @@ function SessionHandler (db) {
 	var radio = req.body.truckOwner;
     var latitude = req.body.latitude;
     var longitude = req.body.longitude;
-    var currentLatitude = req.body.currentlatitude;
+	var currentLatitude = req.body.currentlatitude;
     var currentLongitude = req.body.currentlongitude;
     console.log(req.body);
 	
 	console.log(radio);
-	
 	var emailID = req.body.emailID;
 	var passwd = req.body.passwd;
 	
@@ -56,7 +55,7 @@ function SessionHandler (db) {
             if (err) {
 			
                 if (err.no_such_user) {
-                    return res.render("FirstPage", {emailID:username, passwd:"", username_error:"No such user"}); //changed 'login' to 'FirstPage'
+                                     return res.render("FirstPage", {emailID:username, passwd:"", username_error:"No such user"}); //changed 'login' to 'FirstPage'
                 }
                 else if (err.invalid_password) {
                     return res.render("FirstPage", {emailID:username, passwd:"", login_error:"Invalid password"});
@@ -78,13 +77,15 @@ function SessionHandler (db) {
 				{
 					return res.redirect('/truckUserDashboard');
 				}
-				else {
-                    console.log("In DisplayWelcome Users current lat and longi are:"+ latitude +" "+ longitude );
+				else
+				{
+					console.log("In DisplayWelcome Users current lat and longi are:"+ latitude +" "+ longitude );
                     users.updateCurrentLocationforUser(req.username, currentLatitude, currentLongitude, function (err, user) {
                         "use strict";
+
                         return res.redirect('/userDashboard');
                     });
-                }
+				}
             });
         });
 
@@ -117,10 +118,8 @@ function SessionHandler (db) {
 
                      if(radio=="No")
                         return res.redirect('/EditProfile');
-                    else
-                   
-
-                    return res.redirect('/truckSignUp');
+                    else  
+						return res.redirect('/truckOwnerSignUp');
                 });
             });
         }
@@ -138,7 +137,6 @@ function SessionHandler (db) {
         var session_id = req.cookies.session;
         sessions.endSession(session_id, function (err) {
             "use strict";
-
             // Even if the user wasn't logged in, redirect to home
             res.cookie('session', '');
             return res.redirect('/');
@@ -202,7 +200,7 @@ function SessionHandler (db) {
         return res.render("welcome", {'username':req.username})
     }
 	
-	this.displayDashboard = function (req, res, next) {
+	this.displayTruckOwnerDashboard = function (req, res, next) {
 	"use strict";
 	var userID = req.username;
 	var foodTruckName = req.body.FoodTruckName;
@@ -212,7 +210,8 @@ function SessionHandler (db) {
 	var aboutMe = req.body.AboutMe;
 	var profileImage = req.files.image;
 	
-	
+	console.log(req.body);
+
 	users.addTruckUserProfile(userID, foodTruckName, licenseNumber, specialityCuisine, operatingHours, aboutMe, profileImage, function(err, user) {
                 "use strict";
 
@@ -220,7 +219,7 @@ function SessionHandler (db) {
                     // this was a duplicate
                     if (err.code == '11000') {
                         errors['email_error'] = "This Email Address is already Signed Up!!";
-                        return res.render("truckstop", errors);
+                        return res.render("truckOwnerSignUp", errors);
                     }
                     // this was a different error
                     else {
@@ -228,7 +227,7 @@ function SessionHandler (db) {
                     }
                 }
 
-		return res.redirect("/truckUserDashboard");
+		return res.redirect("/truckOwnerDashboard");
 		});
 	}
 
@@ -240,11 +239,10 @@ function SessionHandler (db) {
         var userID=req.username;
         var WhatILike = req.body.WhatILike;
         var Distance = req.body.Distance;
-        var profileImage = req.files.image;
         console.log(req);
     
         console.log(userID);
-        users.EditProfile(userID, WhatILike, Distance,profileImage, function(err, user) {
+        users.EditProfile(userID, WhatILike, Distance, function(err, user) {
                 "use strict";
 
                 if (err) {
@@ -258,9 +256,7 @@ function SessionHandler (db) {
                         return next(err);
                     }
                 }
-              
-
-        return res.redirect('/GenUserProfile');
+        return res.redirect('/userDashboard');
         });
     }
     
@@ -284,45 +280,46 @@ function SessionHandler (db) {
 			return res.render("index2", {'foodTruckName': user._id, 'licenseNumber': user.license_number, 'specialityCuisine': user.speciality_cuisine, 'operatingHours': user.operatin_hours, 'aboutMe': user.about_me})
 	});
 	}
-//searchTrucksForUser function...logic not working hence trying new logic.
-/*    this.searchTrucksForUser = function (req, res, next) {
-        "use strict";
-        console.log("Inside SearchTruckForUser");
-        var userID = req.username;
-        var searchString = req.body.searchbar;
-
-        var words = searchString.split(" ");
-        console.log("Printing words Array " + words)
-        users.findLocation(userID,function(err,user){
-            users.searchTrucksForUserWithDistanceAndTags(userID, words, function (err, results){
-                console.log("Printing results Array "+results);
-//                return res.render("userDashboard", {'latitude': user.latitude, 'longitude': user.longitude, 'locations':results})
-                return res.redirect("/truckUserDashboard");
-            });
-            console.log("Printing users "+user);
-
-        });
-*//*        users.addTruckUserProfile(userID, foodTruckName, licenseNumber, specialityCuisine, operatingHours, aboutMe, profileImage, function(err, user) {
-            "use strict";
-
-            if (err) {
-                // this was a duplicate
-                if (err.code == '11000') {
-                    errors['email_error'] = "This Email Address is already Signed Up!!";
-                    return res.render("truckstop", errors);
+	
+	this.serveToday = function(req, res,next) {
+	"use strict";
+	console.log(req.cookies.session);
+	users.addTodaysInformation(req.username, req.body.todaysMenu, req.body.todaysMenuTags, function (err, todaysInfo) {
+		if (err) {
+                    // this was a duplicate
+                    if (err.code == '11000') {
+                        errors['email_error'] = "This Email Address is already Signed Up!!";
+                        return res.render("truckstop", errors);
+                    }
+                    // this was a different error
+                    else {
+                        return next(err);
+                    }
                 }
-                // this was a different error
-                else {
-                    return next(err);
+		res.redirect('/truckUserDashboard');
+	});
+	}
+	
+	this.displayUnsuscribePage = function(req, res, next) {
+	console.log(req.cookies.session);
+	users.unsubscribe( req.username, req.body.userSubscription, function (err, unsubscribed )
+	{
+		if (err) {
+                    // this was a duplicate
+                    if (err.code == '11000') {
+                        errors['email_error'] = "This Email Address is already Signed Up!!";
+                        return res.render("FirstPage", errors);
+                    }
+                    // this was a different error
+                    else {
+                        return next(err);
+                    }
                 }
-            }
-
-            return res.redirect("/truckUserDashboard");
-        });*//*
-      //  return res.redirect("/truckUserDashboard");
-    }*/
-
-    this.searchTrucksForUser = function (req, res, next) {
+		res.redirect('/subscriptions');
+		});
+		}
+		
+		this.searchTrucksForUser = function (req, res, next) {
         "use strict";
         console.log("Inside SearchTruckForUser");
         var userID = req.username;
@@ -363,7 +360,6 @@ function SessionHandler (db) {
                             return res.render("userDashboard", {'latitude': user.latitude, 'longitude': user.longitude, 'locations':finalArray})
                         }
                     });
-                    //callback1(err,finalArray);
                 });
             });
         });

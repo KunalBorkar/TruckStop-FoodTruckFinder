@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Create your profile: truck owner</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="shortcut icon" href="assets/img/favicon.png">
+
+    <title>Truck Owner Profile</title>
 
     <link rel="stylesheet" type="text/css" href="assets/css/demo.css" />
     <link rel="stylesheet" type="text/css" href="assets/css/style1.css" />
@@ -45,6 +46,7 @@
             </ul>
             <ul class="nav navbar-nav navbar-left">
                 <li><input type="text" class="form-control-header-rounded col-lg-push-1" placeholder="Search"></li>
+                <li><button type="submit" class="btn btn-warning btn-header">SEARCH</button></li>
             </ul>
         </div><!--/.nav-collapse -->
     </div>
@@ -62,22 +64,25 @@
     <div id="mapdiv" class="container">
         <div class="row mt centered">
             <div class="col-lg-6 col-lg-offset-3">
+                <h1 class="control-label">MY PROFILE</h1>
                 <form method="post" class="control-label" role="form">
-                    <div class="form-group">
-                        <h1 class="control-label">MY PROFILE</h1>
-                        <!--<h1 class="control-label" style="text-align: center; font-weight: bolder;">MY PROFILE</h1>-->
                         <h4 class="control-label1">Name : {{firstName}} {{lastName}}</h4>
                         <h4 class="control-label1">Email Address: {{EmailAddress}}</h4>
                         <h4 class="control-label1">Your choices:</h4>
                         <h4 class="control-label1">Cuisines I like: {{WhatILike}}</h4>
                         <h4 class="control-label1">Notify when food truck is within : {{Distance}}</h4>
                         <button type="button" class="btn btn-warning btn-lg joinbtn">EDIT</button>
-                    </div>
                 </form>
             </div>
         </div>
     </div>
 </div>
+<div class="container">
+    <hr>
+    <p class="footer centered" style="font-weight: bolder;">©2014 TruckStop &nbsp; &nbsp;Created by sAaPkUnUvA</p>
+    <p class="footer centered" style="font-weight: bolder;"></p>
+</div><!-- /container -->
+
 
 <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
 <script src="assets/js/bootstrap.min.js"></script>

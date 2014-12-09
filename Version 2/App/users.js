@@ -1,7 +1,8 @@
 var bcrypt = require('bcrypt-nodejs')
 	, MongoDb = require("mongodb")
-	, fs = require("fs");
-var distance = require('google-distance-matrix');
+	, fs = require("fs")
+	, distance = require('google-distance-matrix');
+
 /* The UsersDAO must be constructed with a connected database object */
 function UsersDAO(db) {
     "use strict";
@@ -16,6 +17,7 @@ function UsersDAO(db) {
     var users = db.collection("user");
 	var userImages = db.collection("userImage");
     var trucks = db.collection("trucks");
+	var today = db.collection("tempMenuStore");
 
     this.addUser = function(firstName, lastName, emailAddress, password, radio, latitude, longitude, callback) {
         "use strict";
@@ -103,7 +105,7 @@ function UsersDAO(db) {
     }
 */
 
-    this.getTrucks = function(num,userLatitude, userLongitude, callback) {
+this.getTrucks = function(num,userLatitude, userLongitude, callback) {
         "use strict";
 
         trucks.find().sort('_id', -1).limit(num).toArray(function(err, items) {
@@ -113,6 +115,7 @@ function UsersDAO(db) {
 
             console.log("Found " + items.length + " posts");
             console.log("Result " + items);
+
 
             var finalArray = [];
             var count = 0;
@@ -145,85 +148,52 @@ function UsersDAO(db) {
             });
         });
     }
-/*
+	
+	this.addTodaysInformation = function (userID, todayMenu, todaysMenuTags, callback) {
+		
+		today.update({'_id': userID}, {$set : {'menu': todayMenu, 'cuisine': todaysMenuTags}}, {upsert: true}, function (err, todaysInfo) {
+			callback(err, todaysInfo);
+		});
+	}
 
-    this.searchTrucksForUserWithDistance = function(username,tagsToSearch, callback) {
-        "use strict";
-        this.findLocation(username, function(err, user) {
-            var finalArray = [];
-            trucks.find().toArray(function (err, docs) {
-                "use strict";
-                var count=0;
-                docs.forEach(function (doc) {
-                    if (doc != null) {
-                        console.log("Printing all the documents in Trucks Table " + doc);
-                        var origins = [user.latitude + ',' + user.longitude];
-                        var destinations = [doc.latitude + ',' + doc.longitude];
-                        console.log(origins);
-                        distance.units('imperial');
-                        distance.matrix(origins, destinations, function (err, distances) {
-                            if (!err)
-                                console.log(distances.rows[0].elements[0].distance.value);
-                            var distanceValue = distances.rows[0].elements[0].distance.value;
-                            if (distanceValue < 6700) {
-                                console.log("Printing distance value " + distanceValue)
-                                var tagsString = doc.todaysTags;
-                                var menuString = doc.todaysMenu;
-                                var isTruckAddedOnce = false;
-                                tagsToSearch.forEach(function (keyword) {
-                                    if (tagsString.match(keyword) > 0 && isTruckAddedOnce == false) {
-                                        finalArray.push(doc);
-                                        isTruckAddedOnce = true;
-                                    }
-                                    else if (menuString.match(keyword) > 0 && isTruckAddedOnce == false) {
-                                        finalArray.push(doc);
-                                        isTruckAddedOnce = true;
-                                    }
-                                });
-                                count++;
-                                console.log("Prinitng final Array " + finalArray)
-                            }
-                        });
-                    }
-                });
-            });
-        });
-    }
-*/
+	this.getSubscriptions = function (userID, callback) {
+		
+		users.findOne({'_id': userID}, function (err, subscriptions) {
+			callback(err, subscriptions);
+		});
+	}
+	
+	this.unsubscribe = function (userID, unsubscribedFoodtruck, callback) {
+	
+		var unsubscribeQuery = {$pull: {'subscription' : unsubscribedFoodtruck} }
+		
+		users.update({'_id':userID}, unsubscribeQuery, function (err, unsubscribed) {
+			callback(err, unsubscribed);
+		});
+	}
+	
+	this.getFoodTruckInfo = function (foodTruckName, callback) {
+	
+	var foodTruck = {'food_truck_name' : foodTruckName}
 
-
-
-
-
-     this.EditProfile = function(userID, WhatILike, Distance,profileImage, callback) {
-        
-        var userprofileinfo = {$set: {'whatilike': WhatILike, 'Distance': Distance}};
-        var query = {_id: userID};
-
-        var data = fs.readFileSync(profileImage.path);
-        var image = new MongoDb.Binary(data);
-        var imageType = profileImage.type;
-        var imageName = profileImage.name;
-        
-        var userImageInfo = {'_id': userID, 'image': image, 'image_type': imageType, 'image_name': imageName}
-
-
-
-        users.update(query, userprofileinfo, function(err, result){
-            userImages.save(userImageInfo, function(err, result){ 
-            callback(err, userprofileinfo);
-        	});
-        });
-    }
-    
-    this.updateCurrentLocationforUser = function (username, currentlatitude, currentlongitude, callback) {
+		users.findOne(foodTruck, function (err, foodTruckInfo) {
+			callback(err, foodTruckInfo);
+		});
+	}
+	
+	this.getFoodTruckOwnerImage = function(userID, callback) {
+		userImages.findOne({'_id':userID}, function (err, foodTruckImage) {
+				callback(err, foodTruckImage);
+		});
+	}
+	
+	this.updateCurrentLocationforUser = function (username, currentlatitude, currentlongitude, callback) {
         console.log("In DisplayWelcome Users current lat and longi are:" + currentlatitude + " " + currentlongitude);
         users.update({'_id': username}, {$set: {'latitude': currentlatitude, 'longitude': currentlongitude}}, function (err, user) {
             callback(err, user);
         });
     }
-
-    this.getTrucksByTags = function (words, results, callback1) {
+this.getTrucksByTags = function (words, results, callback1) {
         "use strict";
         var count = 0;
         var finalArray = [];
@@ -257,7 +227,6 @@ function UsersDAO(db) {
             callback1(err,finalArray);
         });
     }
-
 }
 
 module.exports.UsersDAO = UsersDAO;

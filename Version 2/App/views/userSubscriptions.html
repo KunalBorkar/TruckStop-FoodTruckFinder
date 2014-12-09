@@ -1,0 +1,42 @@
+<html>
+	<head>
+		<title>
+			Subscription
+		</title>
+		<script>
+			function myfunc(element) {
+				var tempUserSubscription = document.getElementById('subscription');
+				tempUserSubscription.value = element.name;
+				document.forms["userSubscriptionForm"].submit();
+			}
+		</script>
+	</head>
+	<body>
+		<h1>
+			Manage Your Subscriptions!!
+		</h1>
+		<p>
+			{{ noSubscription }}
+		</p>
+		<form action="/searchFoodTrucks">
+			<input type="submit" value="Add New Subscriptions"/>
+		</form>
+		<ul>
+			{% for userSubscription in userSubscriptions %}
+				<li>
+					{{ userSubscription }} <input type="button" value="Unsubscribe" name={{ userSubscription }} onclick="myfunc(this)"/> </form>
+				</li>
+				<br/>
+			{% endfor %}
+		</ul>
+		<form method="post" id="userSubscriptionForm">
+			<input id="subscription" type="hidden" name="userSubscription">
+		</form>
+		<form action="/truckOwnerDashboard">
+			<input type="submit" value="Home"/>
+		</form>
+		<form action="/logout">
+			<input type="submit" value="Logout"/>
+		</form>	
+	</body>
+</html>

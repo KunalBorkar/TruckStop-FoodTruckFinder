@@ -8,7 +8,7 @@
     <meta name="author" content="">
     <link rel="shortcut icon" href="assets/img/favicon.png">
 
-    <title>Truck Owner - Today's Menu</title>
+    <title>Truck Owner Sign Up</title>
 
     <link rel="stylesheet" type="text/css" href="assets/css/demo.css" />
     <link rel="stylesheet" type="text/css" href="assets/css/style1.css" />
@@ -37,15 +37,12 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <h1 class="navbar-brand">
-                <b>TruckStop</b>
-            </h1>
+            <h1 class="navbar-brand"><b>TruckStop</b></h1>
+            <!--<a class="navbar-brand" href="#"><b>TruckStop</b></a>-->
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <button type="submit" class="btn btn-warning btn-header">LOGOUT</button>
-                </li>
+                <li><button type="submit" class="btn btn-warning btn-header">LOGOUT</button></li>
             </ul>
             <ul class="nav navbar-nav navbar-left">
                 <li><input type="text" class="form-control-header-rounded col-lg-push-1" placeholder="Search"></li>
@@ -64,19 +61,20 @@
         <li><span>Image 06</span><div><h3></h3></div></li>
     </ul>
     <div id="mapdiv" class="container">
-        <div class="row">
-            <div class="col-lg-6">
-                <h1 class="control-label">What are you serving today?</h1>
-                    <form id="menu" method="post" class="form-inline" role="form">
-                        <textarea id="txtareamenu" name="todaysMenu" class="form-control" data-role="tagsinput" placeholder="Today's Menu" rows="4" cols="10"></textarea>
-                        <textarea id="txtareatags" name="todaysMenuTags" class="form-control" placeholder="Menu Tags" rows="4" cols="10"></textarea>
+        <div class="row mt centered">
+            <div class="col-lg-6 col-lg-offset-3">
+                <h1 class="control-label">Edit Profile</h1>
+                <form id="editprofile" method="post" class="form-inline">
+                    <div class="form-group">
+                        <input id="name" type="text" name="FoodTruckName" class="form-control" placeholder="Please enter your Name">
+                        <input id="emailAddress" type="text" name="emailAddress" class="form-control" placeholder="Please enter your Email address">
+                        <input id="choices" type="text" name="choices" class="form-control" placeholder="Please enter your choices">
+                        <input id="cuisines" type="text" name="Cuisines" class="form-control" placeholder="Please enter your Speciality Cuisine">
+                        <input id="notify" type="text" name="notifications" class="form-control" placeholder="Enter distance to receive notifications">
                         <br>
-                        <button type="button" class="btn btn-warning btn-lg joinbtn" onclick="validateServingMenu()">STORE MENU</button>
-                    </form>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div id="map-canvas" style="width: 600px; height: 400px"></div>
+                        <button id="btnsignup" type="button" class="btn btn-warning btn-lg joinbtn" onclick="validateEditProfile()">SAVE</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -87,25 +85,40 @@
     <p class="footer centered" style="font-weight: bolder;"></p>
 </div><!-- /container -->
 <!-- Bootstrap core JavaScript
-  ================================================== -->
+================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
 <script src="assets/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="assets/js/modernizr.custom.86080.js"></script>
 <script type="text/javascript">
-    function validateServingMenu(){
-        if($("#txtareamenu").val() == "") {
-            $("#txtareamenu").addClass("errorClass");
-            $("#txtareamenu").attr('placeholder', "Please provide today's menu");
-            $("#txtareamenu").addClass("errorplaceHolder");
+    function validateEditProfile(){
+        if($("#name").val() == "") {
+            $("#name").addClass("errorClass");
+            $("#name").attr('placeholder', "Please provide Name");
+            $("#name").addClass("errorplaceHolder");
         }
-        if($("#txtareatags").val() == "") {
-            $("#txtareatags").addClass("errorClass");
-            $("#txtareatags").attr('placeholder', "Please provide tags for menu");
-            $("#txtareatags").addClass("errorplaceHolder");
+        if($("#emailAddress").val() == "") {
+            $("#emailAddress").addClass("errorClass");
+            $("#emailAddress").attr('placeholder', "Please provide Email Address");
+            $("#emailAddress").addClass("errorplaceHolder");
+        }
+        if($("#choices").val() == "") {
+            $("#choices").addClass("errorClass");
+            $("#choices").attr('placeholder', "Please provide choices");
+            $("#choices").addClass("errorplaceHolder");
+        }
+        if($("#cuisines").val() == "") {
+            $("#cuisines").addClass("errorClass");
+            $("#cuisines").attr('placeholder', "Please provide speciality cuisines");
+            $("#cuisines").addClass("errorplaceHolder");
+        }
+        if($("#notify").val() == "") {
+            $("#notify").addClass("errorClass");
+            $("#notify").attr('placeholder', "Please provide distance");
+            $("#notify").addClass("errorplaceHolder");
         }
         else {
-            document.forms["menu"].submit();
+            document.forms["editprofile"].submit();
         }
     }
 </script>

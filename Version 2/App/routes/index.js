@@ -13,19 +13,6 @@ module.exports = exports = function(app, db) {
     // The main page of the blog
     app.get('/', contentHandler.displayMainPage);
 	app.post('/', sessionHandler.displayWelcome);
-
-    // The main page of the blog, filtered by tag
-//    app.get('/tag/:tag', contentHandler.displayMainPageByTag);
-
-    // A single post, which can be commented on
-//    app.get("/post/:permalink", contentHandler.displayPostByPermalink);
-//    app.post('/newcomment', contentHandler.handleNewComment);
-//    app.get("/post_not_found", contentHandler.displayPostNotFound);
-
-    // Displays the form allowing a user to add a new post. Only works for logged in users
-  //  app.get('/newpost', contentHandler.displayNewPostPage);
-   // app.post('/newpost', contentHandler.handleNewPost);
-
     // Login form
     app.get('/login', sessionHandler.displayLoginPage);
     app.post('/login', sessionHandler.displayWelcome);
@@ -36,20 +23,30 @@ module.exports = exports = function(app, db) {
     // Welcome page
     app.get("/welcome", sessionHandler.displayWelcomePage);
 
-    app.get("/trucksignup",contentHandler.displayTruckSignupPage);
-	app.post("/trucksignup",sessionHandler.displayDashboard);
+    app.get("/truckOwnerSignUp",contentHandler.displayTruckSignupPage);
+	app.post("/truckOwnerSignUp",sessionHandler.displayTruckOwnerDashboard);
 	
-	app.get("/truckUserDashboard", contentHandler.displayTruckUserDashboardPage);
+	app.get("/truckOwnerDashboard", contentHandler.displayTruckOwnerDashboardPage);
+	//app.post("/truckUserDashboard", contentHandler.displayServeTodayPage);
 
     app.get('/GenUserProfile', contentHandler.displayProfile);
     app.get('/EditPRofile', contentHandler.displayEditProfilePage);
     app.post('/EditPRofile', sessionHandler.EditProfile);
-	//app.post("/truckUserDashboard", );
+	
+	app.get('/serveToday', contentHandler.displayServeTodayPage);
+	app.post('/serveToday', sessionHandler.serveToday);
 
-    //request to navigate to User's Dash Board
     app.get("/userDashboard", contentHandler.displayUserDashboardPage);
-    app.post("/userDashboard", sessionHandler.searchTrucksForUser);
+	app.post("/userDashboard", sessionHandler.searchTrucksForUser);
 
-    // Error handling middleware
+	app.get("/subscriptions", contentHandler.displaySubscriptionPage);
+	app.post("/subscriptions", sessionHandler.displayUnsuscribePage);
+	
+	app.get("/searchFoodTrucks", contentHandler.displaySearchPage);
+	
+	app.get('/foodtruck/:foodTruckName', contentHandler.displayFoodtruck);
+	
+	app.get('/foodtruck/img/:userID', contentHandler.displayImage);
+
     app.use(ErrorHandler);
 }

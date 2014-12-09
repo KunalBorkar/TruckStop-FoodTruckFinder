@@ -36,6 +36,7 @@ function SessionsDAO(db) {
         // Remove session document
         sessions.remove({ '_id' : session_id }, function (err, numRemoved) {
             "use strict";
+			console.log("Hello3");
             callback(err);
         });
     }
