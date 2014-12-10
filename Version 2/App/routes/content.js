@@ -102,17 +102,7 @@ function ContentHandler (db) {
 		}
 		}
 
-    this.displayEditProfilePage = function(req, res, next) {
-        "use strict";
-		if(req.cookies.session.length!=0)
-		{
-			return res.render('EditProfile');
-		}
-		else
-		{
-			return res.redirect('/');
-		}
-    }
+   
 
 	this.displayServeTodayPage = function(req, res, next) {
         "use strict";
@@ -126,21 +116,58 @@ function ContentHandler (db) {
 		}
     }
 
+    
+
+    var us= db.collection('user');
+    this.displayEditProfilePage = function(req, res, next) {
+        "use strict";
+
+
+         var userID= req.username;
+          us.findOne({ '_id' : userID}, function(err, user) {
+            "use strict"; 
+
+        return res.render('userEditProfile',{'firstName': user.firstName, 'lastName': user.lastName, 'emailAddress' : user._id});
+    });
+    }
+
+
+    //var users= db.collection('user');
     this.displayProfile = function(req, res, next) {
         "use strict";
-		if(req.cookies.session.length!=0)
-		{
-			users.findOne({ '_id' : "n@yahoo.com"}, function(err, user) {
+
+         var userID= req.username;
+          us.findOne({ '_id' : userID}, function(err, user) {
+            "use strict";   
+
             console.log(user.Distance);
-            return res.render('GenUserProfile',{'firstName':user.firstName,'lastName': user.lastName,'EmailAddress': user._id,'WhatILike': user.whatilike,'Distance':user.Distance});
-			});
-		}
-		else
-		{
-			return res.redirect('/');
-		}
+            return res.render('userProfile',{'firstName':user.firstName,'lastName': user.lastName,'EmailAddress': user._id,'WhatILike': user.whatilike,'Distance':user.Distance});
+
+        });
 
     }
+
+    this.showImage= function(req, res, next) {
+        "use strict";
+        users.getFoodTruckOwnerImage(req.username, function(err, resultImage) {
+            console.log("hello");
+            if(resultImage==null)
+            {
+
+                users.getFoodTruckOwnerImage("admin@admin.com", function(err, noImage){
+                    res.end(noImage.image.buffer);
+                
+            });
+            }
+            else
+            {
+            res.end(resultImage.image.buffer, "binary");
+            }
+        });
+    }
+
+
+    
 
     this.displayUserDashboardPage = function(req, res, next) {
         "use strict";

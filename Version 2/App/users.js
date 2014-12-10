@@ -227,6 +227,41 @@ this.getTrucksByTags = function (words, results, callback1) {
             callback1(err,finalArray);
         });
     }
+
+
+    this.EditProfile = function(userID, WhatILike, Distance,profileImage, callback) {
+        
+        var userprofileinfo = {$set: {'whatilike': WhatILike, 'Distance': Distance}};
+        var query = {_id: userID};
+
+        var data = fs.readFileSync(profileImage.path);
+        var image = new MongoDb.Binary(data);
+        var imageType = profileImage.type;
+        var imageName = profileImage.name;
+        
+        var userImageInfo = {'_id': userID, 'image': image, 'image_type': imageType, 'image_name': imageName}
+
+
+
+        users.update(query, userprofileinfo, function(err, result){
+               console.log(image);
+            if(profileImage.size != 0){
+                console.log("Executing if");
+
+               userImages.save(userImageInfo, function(err, result){ 
+                callback(err, userprofileinfo); 
+            });
+           }
+            else {
+                console.log("Executing else");
+                callback(err, userprofileinfo);
+            }
+            
+    
+        });
+    }
+
+    
 }
 
 module.exports.UsersDAO = UsersDAO;

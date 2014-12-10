@@ -29,9 +29,11 @@ module.exports = exports = function(app, db) {
 	app.get("/truckOwnerDashboard", contentHandler.displayTruckOwnerDashboardPage);
 	//app.post("/truckUserDashboard", contentHandler.displayServeTodayPage);
 
-    app.get('/GenUserProfile', contentHandler.displayProfile);
-    app.get('/EditPRofile', contentHandler.displayEditProfilePage);
-    app.post('/EditPRofile', sessionHandler.EditProfile);
+    app.get('/userProfile', contentHandler.displayProfile);
+    app.get('/userProfile/img/:userId', contentHandler.showImage);
+    
+    app.get('/userEditPRofile', contentHandler.displayEditProfilePage);
+    app.post('/userEditPRofile', sessionHandler.EditProfile);
 	
 	app.get('/serveToday', contentHandler.displayServeTodayPage);
 	app.post('/serveToday', sessionHandler.serveToday);

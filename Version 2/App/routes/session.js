@@ -117,7 +117,7 @@ function SessionHandler (db) {
                     res.cookie('session', session_id);
 
                      if(radio=="No")
-                        return res.redirect('/EditProfile');
+                        return res.redirect('/userEditProfile');
                     else  
 						return res.redirect('/truckOwnerSignUp');
                 });
@@ -239,10 +239,11 @@ function SessionHandler (db) {
         var userID=req.username;
         var WhatILike = req.body.WhatILike;
         var Distance = req.body.Distance;
+        var profileImage = req.files.image;
         console.log(req);
     
         console.log(userID);
-        users.EditProfile(userID, WhatILike, Distance, function(err, user) {
+        users.EditProfile(userID, WhatILike, Distance,profileImage, function(err, user) {
                 "use strict";
 
                 if (err) {
@@ -256,7 +257,9 @@ function SessionHandler (db) {
                         return next(err);
                     }
                 }
-        return res.redirect('/userDashboard');
+              
+
+        return res.redirect('/userProfile');
         });
     }
     

@@ -42,11 +42,17 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><button type="submit" class="btn btn-warning btn-header">LOGOUT</button></li>
+                <li>
+<form action="/logout"><button type="submit" class="btn btn-warning btn-header">LOGOUT</button></form></li>
+<li>
+<form action="/userDashboard"><button type="submit" class="btn btn-warning btn-header">HOME</button></form></li>
+
             </ul>
             <ul class="nav navbar-nav navbar-left">
                 <li><input type="text" class="form-control-header-rounded col-lg-push-1" placeholder="Search"></li>
-                <li><button type="submit" class="btn btn-warning btn-header">SEARCH</button></li>
+
+<li><button type="submit" class="btn btn-warning btn-header">SEARCH</button></li>
+
             </ul>
         </div><!--/.nav-collapse -->
     </div>
@@ -63,8 +69,11 @@
 
     <div id="mapdiv" class="container">
         <div class="row mt centered">
-            <div class="col-lg-6 col-lg-offset-3">
-                <form method="post" class="control-label" role="form">
+            <div class="col-lg-3">
+                <img src = "/userProfile/img/{{EmailAddress}}" type="hidden" height="200" width="200"/>
+            </div>
+            <div class="col-lg-6">
+                
                     <div class="form-group">
                         <h1 class="control-label">MY PROFILE</h1>
                         <!--<h1 class="control-label" style="text-align: center; font-weight: bolder;">MY PROFILE</h1>-->
@@ -73,9 +82,11 @@
                         <h4 class="control-label1">Your choices:</h4>
                         <h4 class="control-label1">Cuisines I like: {{WhatILike}}</h4>
                         <h4 class="control-label1">Notify when food truck is within : {{Distance}}</h4>
-                        <button type="button" class="btn btn-warning btn-lg joinbtn">EDIT</button>
+<form class="control-label" role="form" action="/userEditProfile">
+                        <button type="submit" class="btn btn-warning btn-lg joinbtn">EDIT</button>
+</form>
                     </div>
-                </form>
+               
             </div>
         </div>
     </div>

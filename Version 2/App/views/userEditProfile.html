@@ -64,13 +64,23 @@
         <div class="row mt centered">
             <div class="col-lg-6 col-lg-offset-3">
                 <h1 class="control-label">Edit Profile</h1>
-                <form id="editprofile" method="post" class="form-inline">
+                <form id="editprofile" method="post" class="form-inline" role="form" enctype="multipart/form-data">
                     <div class="form-group">
-                        <input id="name" type="text" name="FoodTruckName" class="form-control" placeholder="Please enter your Name">
-                        <input id="emailAddress" type="text" name="emailAddress" class="form-control" placeholder="Please enter your Email address">
+                        <input id="name" type="text" name="FoodTruckName" class="form-control" placeholder="{{firstName}} {{lastName}}" disabled>
+                        <input id="emailAddress" type="text" name="emailAddress" class="form-control" placeholder="{{emailAddress}}" disabled>
                         <input id="choices" type="text" name="choices" class="form-control" placeholder="Please enter your choices">
-                        <input id="cuisines" type="text" name="Cuisines" class="form-control" placeholder="Please enter your Speciality Cuisine">
-                        <input id="notify" type="text" name="notifications" class="form-control" placeholder="Enter distance to receive notifications">
+                        <input id="WhatILike" type="text" name="WhatILike" class="form-control" placeholder="Please enter your Speciality Cuisine">
+                        <br>
+                        <select id="seldistance" name="Distance" class="form-control" style="width:280px;">
+                            <option value="selectdistance">Select Distance in miles</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                        <br>
+                        <input type="file" name="image" class="form-control">
                         <br>
                         <button id="btnsignup" type="button" class="btn btn-warning btn-lg joinbtn" onclick="validateEditProfile()">SAVE</button>
                     </div>
@@ -111,11 +121,6 @@
             $("#cuisines").addClass("errorClass");
             $("#cuisines").attr('placeholder', "Please provide speciality cuisines");
             $("#cuisines").addClass("errorplaceHolder");
-        }
-        if($("#notify").val() == "") {
-            $("#notify").addClass("errorClass");
-            $("#notify").attr('placeholder', "Please provide distance");
-            $("#notify").addClass("errorplaceHolder");
         }
         else {
             document.forms["editprofile"].submit();
