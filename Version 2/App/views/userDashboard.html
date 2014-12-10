@@ -40,16 +40,11 @@
                     <span class="icon-bar"></span>
                 </button>
                 <h1 class="navbar-brand"><b>TruckStop</b></h1>
-            <!--<a class="navbar-brand" href="#"><b>TruckStop</b></a>-->
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
-<form class="control-label" role="form" action="/logout">
-                    <li><button type="submit" class="btn btn-warning btn-header">LOGOUT</button></li>
-</form>
-<form class="control-label" role="form" action="/userProfile">
-				<li><button type="submit" class="btn btn-warning btn-header">PROFILE</button></li>
-</form>
+                        <li><form role="form" action="/userProfile"><button type="submit" class="btn btn-warning btn-header" style="margin-right: 12px">PROFILE</button></form></li>&nbsp;
+                        <li><form action="/logout"><button type="submit" class="btn btn-warning btn-header">LOGOUT</button></form></li>
                 </ul>
 				<form id="searchForm" method="post">
 					<ul class="nav navbar-nav navbar-left">
@@ -91,18 +86,17 @@
                     <h1 class="control-label">Currently Around You</h1>
                     <div id="map-canvas" style="width: 600px; height: 400px"></div>
                 </div>
-                <div class="col-lg-3">
-                    <h1 class="control-label">Hihsdfgsdf</h1>
+                <div class="col-lg-3" style="padding-right:5px;">
+                    <h1 class="control-label" style="font-size:45px;">Recommendations</h1>
                 </div>
             </div>
-        </div>
     </div>
 <div class="container">
         <hr>
         <p class="footer centered" style="font-weight: bolder;">©2014 TruckStop &nbsp; &nbsp;Created by sAaPkUnUvA</p>
         <p class="footer centered" style="font-weight: bolder;"></p>
 </div><!-- /container -->
-
+    </div>
     <!-- Bootstrap core JavaScript
       ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
@@ -152,9 +146,7 @@
                 })(marker, i));
                 {% endfor %}
             }
-
             google.maps.event.addDomListener(window, 'load', initialize);
 </script>
 </body>
-
 </html>
