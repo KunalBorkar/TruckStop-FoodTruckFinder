@@ -174,6 +174,7 @@ function UsersDAO(db) {
 	}
 	
 	this.getFoodTruckOwnerImage = function(userID, callback) {
+		console.log("FoodTruckImage"+ userID);
 		userImages.findOne({'_id':userID}, function (err, foodTruckImage) {
 				callback(err, foodTruckImage);
 		});
@@ -276,6 +277,12 @@ this.getTrucksByTags = function (words, results, callback1) {
             }
         });
     }
+	
+	this.addTruckSubscription = function(userID, foodTruckName, callback) {
+	users.update({'_id': userID}, {$addToSet: {subscription: foodTruckName}}, {upsert:true}, function(err, result){
+		callback(err, result);
+		});
+	}
 
     
 }

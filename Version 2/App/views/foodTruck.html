@@ -41,7 +41,7 @@
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <form action="/userDashboard"><button type="submit" class="btn btn-warning btn-header" style="margin-right: 12px">HOME</button></form></li>
+                    <form method="post" action="/home"><button type="submit" class="btn btn-warning btn-header" style="margin-right: 12px">HOME</button></form></li>
                 <li>
                     <form action="/logout"><button type="submit" class="btn btn-warning btn-header">LOGOUT</button></form></li>
             </ul>
@@ -70,12 +70,16 @@
         </div>
         <div class="col-lg-5" style="padding-left: 20px;">
                 <div class="form-group">
-                    <h1 class="control-label">{{foodTruckName}}</h1>
+					<form method="post" action="/subscribe">
+                    <h1 class="control-label" value="{{foodTruckName}}">{{foodTruckName}}</h1>
+					<input type="hidden" name="foodTruckName" value="{{foodTruckName}}">
                     <h4 class="control-label1">Food Truck Owner:{{foodTruckOwner}}</h4>
                     <h4 class="control-label1">About Me:{{aboutMe}}</h4>
                     <h4 class="control-label1">Speciality Cuisine:{{cuisine}}</h4>
                     <h4 class="control-label1">Operating Hours:{{operatingHours}}</h4>
                     <h4 class="control-label1">Today's Menu:{{todaysMenu}}</h4>
+					<button id="btnsignup" type="submit" class="btn btn-warning btn-lg joinbtn">SUBSCRIBE</button>
+					</form>
                 </div>
         </div>
         <div class="col-lg-3">

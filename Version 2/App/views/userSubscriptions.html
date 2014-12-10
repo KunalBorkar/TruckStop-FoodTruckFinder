@@ -62,7 +62,7 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><button type="submit" class="btn btn-warning btn-header" onclick="returnBack()">LOGOUT</button></li>
+                   <form action="/logout"> <li><button type="submit" class="btn btn-warning btn-header" onclick="returnBack()">LOGOUT</button></li></form>
                 </ul>
                 <form id="searchForm" method="post">
                     <ul class="nav navbar-nav navbar-left">
@@ -88,7 +88,7 @@
             <div class="col-lg-2">
                 </div>
             <div class="col-lg-8">
-                <form id="subscription" method="post" class="form-inline">
+                <form id="subscriptionTemp" method="post" class="form-inline">
                     <div class="form-group">
 
             <h1 class="control-label">Manage Your Subscriptions!</h1>
@@ -102,7 +102,7 @@
                  <h3 class="control-label1">{% for userSubscription in userSubscriptions %}
 
 				<li>
-					<br>{{ userSubscription }} <button id="btnsignup" type="button" class="btn btn-warning btn-lg joinbtn" name={{userSubscription}] onclick="myfunc(this)">UNSUBSCRIBE</button>
+					<br>{{ userSubscription }} <button type="button" class="btn btn-warning btn-lg joinbtn" name="{{userSubscription}}" onclick="myfunc(this)">UNSUBSCRIBE</button>
                     <!--<input type="button" value="Unsubscribe" name={{ userSubscription }} onclick="myfunc(this)"/>-->
 
 				</li>

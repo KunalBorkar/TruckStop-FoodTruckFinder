@@ -53,6 +53,9 @@ module.exports = exports = function(app, db) {
 	app.get("/truckOwnerSubscriptions", contentHandler.displayTruckOwnerSubscriptionPage);
 	app.post("/truckOwnerSubscriptions", sessionHandler.displayUnsuscribePageForTruckOwner);
 	
+	app.post("/subscribe", contentHandler.displayRedirection);
+	
+	app.post("/home", contentHandler.displayHomeScreen);
 	
 	app.get("/searchFoodTrucks", contentHandler.displaySearchPage);
 	

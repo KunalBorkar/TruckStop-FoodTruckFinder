@@ -363,7 +363,7 @@ function SessionHandler (db) {
 		}
 	
 	this.displayUnsuscribePageForUser = function(req, res, next) {
-	console.log(req.cookies.session);
+	console.log("HiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiHellooooooo"+req.body.userSubscription);
 	users.unsubscribe( req.username, req.body.userSubscription, function (err, unsubscribed )
 	{
 		if (err) {

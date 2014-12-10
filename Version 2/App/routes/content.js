@@ -246,7 +246,7 @@ function ContentHandler (db) {
             }
             users.getTrucks(5,user.latitude, user.longitude, function(err, results) {
                 console.log("Printing results Array "+results);
-                return res.render("userDashboard", {'latitude': user.latitude, 'longitude': user.longitude, 'locations':results})
+                return res.render("userDashboard", {'latitude': user.latitude, 'longitude': user.longitude, 'locations':results, 'userSubscriptions':user.subscription})
             });
         });
 
@@ -273,6 +273,7 @@ function ContentHandler (db) {
 				}
 					var foodTruckOwnerName = foodTruckInfo['firstName'] + " " + foodTruckInfo['lastName']
 					console.log("Printing users locatitude and longitude " + req.userLatitude + " " + req.userLongitude);
+				console.log("Display Food Truck "+foodTruckInfo['_id']);
 					return res.render('foodTruck', {'foodTruckName' : foodTruckInfo['food_truck_name'], 'foodTruckOwner': foodTruckOwnerName, 'aboutMe': foodTruckInfo['about_me'], 'cuisine': foodTruckInfo['whatyouserve'], 'operatingHours': foodTruckInfo['operating_hours'], 'foodTruckUserID': foodTruckInfo['_id'], 'userLatitude' : req.userLatitude, 'userLongitude' : req.userLongitude, 'truckLatitude' : foodTruckInfo['latitude'] , 'truckLongitude' : foodTruckInfo['longitude']});
 			});
 		}
@@ -283,7 +284,7 @@ function ContentHandler (db) {
 	}
 	
 	this.displayImage = function(req, res, next){
-		users.getFoodTruckOwnerImage(req.username, function(err, resultImage) {
+		users.getFoodTruckOwnerImage(req.params.userID, function(err, resultImage) {
 			res.end(resultImage.image.buffer, "binary");
 		});
 	}
@@ -309,6 +310,43 @@ function ContentHandler (db) {
        return res.render('truckOwnerEditProfile',{'firstName': user.firstName, 'lastName': user.lastName, 'EmailAddress' : user._id, 'licenseNumber': user.license_number});
    });
    }
+	
+	this.displayRedirection = function(req, res, next) {
+		"use strict";
+		var userID = req.username;
+		var foodTruckName = req.body.foodTruckName;
+		console.log("hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii" + foodTruckName);
+		users.addTruckSubscription(userID, foodTruckName, function(err, user){
+				us.findOne({ '_id' : userID}, function(err, user) {
+					var isItTruckUser = user['truckOwner'];
+					console.log("FoooooooodTruckkkkkk "+isItTruckUser);
+					if(isItTruckUser == "Yes")
+					{
+						return res.redirect('/truckOwnerDashboard');
+					}
+					else
+					{
+						return res.redirect('/userDashboard');
+					}
+				});
+					});
+				}
+	
+	this.displayHomeScreen = function(req, res, next) {
+		var userID = req.username;
+		us.findOne({ '_id' : userID}, function(err, user) {
+					var isItTruckUser = user['truckOwner'];
+					console.log("FoooooooodTruckkkkkk "+isItTruckUser);
+					if(isItTruckUser == "Yes")
+					{
+						return res.redirect('/truckOwnerDashboard');
+					}
+					else
+					{
+						return res.redirect('/userDashboard');
+					}
+				});
+	}
 }
 
 module.exports = ContentHandler;
