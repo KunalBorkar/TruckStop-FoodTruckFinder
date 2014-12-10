@@ -35,6 +35,12 @@ module.exports = exports = function(app, db) {
     app.get('/userEditPRofile', contentHandler.displayEditProfilePage);
     app.post('/userEditPRofile', sessionHandler.EditProfile);
 	
+	app.get('/truckOwnerEditProfile', contentHandler.displaytruckOwnerProfilePage);
+	app.post('/truckOwnerEditProfile',sessionHandler.truckOwnerEditProfile);
+	
+	app.get('/truckOwnerProfile', contentHandler.displayTruckOwnerProfile);
+    app.get('/truckOwnerProfile/img/:userId', contentHandler.showImage);
+	
 	app.get('/serveToday', contentHandler.displayServeTodayPage);
 	app.post('/serveToday', sessionHandler.serveToday);
 

@@ -143,7 +143,9 @@
 
                 google.maps.event.addListener(marker, 'click', (function(marker, i) {
                     return function() {
-                        infowindow.setContent("{{loc['name']}}");
+                   var buildUrl = "\"/foodtruck/" + "{{loc['name']}}" + "\"";
+                        var content = '<a href="/foodtruck/{{loc.name}}">'+ '{{loc.name}}' + '<a/>'
+                        infowindow.setContent(content);
                         infowindow.open(map, marker);
                         i++;
                     }

@@ -9,16 +9,18 @@ function SessionHandler (db) {
     var sessions = new SessionsDAO(db);
 
     this.isLoggedInMiddleware = function(req, res, next) {
-        var session_id = req.cookies.session;
-        sessions.getUsername(session_id, function(err, username) {
-            "use strict";
+       var session_id = req.cookies.session;
+       sessions.getUsername(session_id, function(err, userInfo) {
+           "use strict";
 
-            if (!err && username) {
-                req.username = username;
-            }
-            return next();
-        });
-    }
+           if (!err && userInfo.username) {
+               req.username = userInfo.username;
+               req.userLatitude = userInfo.latitude;
+               req.userLongitude = userInfo.longitude;
+           }
+           return next();
+       });
+   }
 
     this.displayLoginPage = function(req, res, next) {
         "use strict";
@@ -66,7 +68,7 @@ function SessionHandler (db) {
                 }
             }
 			
-            sessions.startSession(user['_id'], function(err, session_id) {
+            sessions.startSession(user['_id'],currentLatitude, currentLongitude, function(err, session_id) {
                 "use strict";
 
                 if (err) return next(err);
@@ -75,7 +77,7 @@ function SessionHandler (db) {
 				var isItTruckUser = user['truckOwner'];
 				if(isItTruckUser == "Yes")
 				{
-					return res.redirect('/truckUserDashboard');
+					return res.redirect('/truckOwnerDashboard');
 				}
 				else
 				{
@@ -109,7 +111,7 @@ function SessionHandler (db) {
                     }
                 }
 
-                sessions.startSession(user['_id'], function(err, session_id) {
+                sessions.startSession(user['_id'], latitude, longitude, function(err, session_id) {
                     "use strict";
 
                     if (err) return next(err);
@@ -205,14 +207,16 @@ function SessionHandler (db) {
 	var userID = req.username;
 	var foodTruckName = req.body.FoodTruckName;
 	var licenseNumber = req.body.LicenseNumber;
-	var specialityCuisine= req.body.SpecialityCuisine;
-	var operatingHours = req.body.OperatingHours;
+	var specialityCuisineYouServe= req.body.SpecialityCuisineYouServe;
+	var SpecialityCuisineILike = req.body.SpecialityCuisineILike;
 	var aboutMe = req.body.AboutMe;
 	var profileImage = req.files.image;
+	var currentLatitude = req.userLatitude;
+    var currentLongitude = req.userLongitude;
 	
-	console.log(req.body);
+	var operatingHours = "Weekday = " + req.body.WeekdayFromH + req.body.WeekdayFromM + " " +req.body.WeekdayFromAP + " To " + req.body.WeekdayToH + req.body.WeekdayToM + " " +req.body.WeekdayToAP + "Weekend = " + req.body.WeekendFromH + req.body.WeekendFromM + " " +req.body.WeekendFromAP + " To "+ req.body.WeekendToH + req.body.WeekendToM + " " +req.body.WeekendToAP ; 
 
-	users.addTruckUserProfile(userID, foodTruckName, licenseNumber, specialityCuisine, operatingHours, aboutMe, profileImage, function(err, user) {
+	users.addTruckUserProfile(userID, foodTruckName, licenseNumber, specialityCuisineYouServe, SpecialityCuisineILike, operatingHours, aboutMe, profileImage, currentLatitude, currentLongitude, function(err, user) {
                 "use strict";
 
                 if (err) {
@@ -263,6 +267,41 @@ function SessionHandler (db) {
         });
     }
     
+	
+	this.truckOwnerEditProfile = function (req, res, next) {
+    "use strict";
+    console.log("truckOwnerEditProfile");
+      
+        var userID=req.username;
+        var WhatILike = req.body.SpecialityCuisineILike;
+		var foodTruckName = req.body.FoodTruckName;
+		var whatiserve = req.body.SpecialityCuisineYouServe;
+		var aboutMe = req.body.AboutMe;
+		var operatingHours = "Weekday = " + req.body.WeekdayFromH + req.body.WeekdayFromM + " " +req.body.WeekdayFromAP + " To " + req.body.WeekdayToH + req.body.WeekdayToM + " " +req.body.WeekdayToAP + "Weekend = " + req.body.WeekendFromH + req.body.WeekendFromM + " " +req.body.WeekendFromAP + " To "+ req.body.WeekendToH + req.body.WeekendToM + " " +req.body.WeekendToAP ; 
+
+        var profileImage = req.files.image;
+        console.log(req);
+    
+        console.log(userID);
+        users.truckOwnerEditProfile(userID, WhatILike, foodTruckName, whatiserve, aboutMe, operatingHours, profileImage, function(err, user) {
+                "use strict";
+
+                if (err) {
+                    // this was a duplicate
+                    if (err.code == '11000') {
+                        errors['email_error'] = "Error";
+                        return res.render("truckstop", errors);
+                    }
+                    // this was a different error
+                    else {
+                        return next(err);
+                    }
+                }
+              
+
+        return res.redirect('/truckOwnerProfile');
+        });
+    }
 
 	this.showProfile = function (req, res, next) {
 	"use strict";

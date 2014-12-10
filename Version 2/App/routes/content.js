@@ -41,8 +41,25 @@ function ContentHandler (db) {
                         return next(err);
                     }
                 }
-			return res.render('truckOwnerDashboard', {'userSubscriptions' : subscriptions['subscription']});
-			});
+			users.findLocation(req.username, function(err, user) {
+                    if (err) {
+                        if (err.code == '11000') {
+                            errors['email_error'] = "This Email Address is already Signed Up!!";
+                            return res.render("truckstop", errors);
+                        }
+
+                        else {
+
+                            return next(err);
+                        }
+                    }
+                    console.log("Printing the user detials " + user.firstName + " " + user.latitude);
+                    users.getTrucks(5,user.latitude, user.longitude, function(err, results) {
+                        console.log("Printing results Array "+results);
+                        return res.render("truckOwnerDashboard", {'latitude': user.latitude, 'longitude': user.longitude, 'locations':results, 'userSubscriptions' : subscriptions['subscription']})
+                    });
+                });
+            });
 		}
 		else
 		{
@@ -227,6 +244,28 @@ function ContentHandler (db) {
 			res.end(resultImage.image.buffer, "binary");
 		});
 	}
+	
+	this.displayTruckOwnerProfile = function(req, res, next) {
+		var userID= req.username;
+         us.findOne({ '_id' : userID}, function(err, user) {
+           "use strict";   
+
+           //console.log(user.Distance);
+           return res.render('truckOwnerProfile',{'firstName':user.firstName,'lastName': user.lastName,'EmailAddress': user._id,'WhatILike': user.whatilike,'WhatYouServe': user.whatyouserve, 'OperatingHours' : user.operating_hours, 'AboutMe': user.about_me, 'FoodTruckName': user.food_truck_name, 'licenseNumber':user.license_number});
+
+       });
+	}
+	
+	this.displaytruckOwnerProfilePage = function(req, res, next) {
+       "use strict";
+	   
+        var userID= req.username;
+         us.findOne({ '_id' : userID}, function(err, user) {
+           "use strict"; 
+
+       return res.render('truckOwnerEditProfile',{'firstName': user.firstName, 'lastName': user.lastName, 'EmailAddress' : user._id, 'licenseNumber': user.license_number});
+   });
+   }
 }
 
 module.exports = ContentHandler;

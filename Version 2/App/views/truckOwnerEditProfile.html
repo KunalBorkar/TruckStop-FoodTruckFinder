@@ -8,7 +8,7 @@
     <meta name="author" content="">
     <link rel="shortcut icon" href="assets/img/favicon.png">
 
-    <title>Truck Owner Sign Up</title>
+    <title>Truck Owner Edit Profile</title>
 
     <link rel="stylesheet" type="text/css" href="assets/css/demo.css" />
     <link rel="stylesheet" type="text/css" href="assets/css/style1.css" />
@@ -42,7 +42,8 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><button type="submit" class="btn btn-warning btn-header">LOGOUT</button></li>
+                    <li><form action="/truckOwnerDashboard"><button type="submit" class="btn btn-warning btn-header" style="margin-right: 12px">HOME</button></form></li>
+                    <li><form action="/logout"><button type="submit" class="btn btn-warning btn-header">LOGOUT</button></form></li>
                     <input id = "currentlatitude" type = "hidden" name="currentlatitude">
                     <input id = "currentlongitude" type = "hidden" name="currentlongitude">
                 </ul>
@@ -61,14 +62,16 @@
         <div id="mapdiv" class="container">
             <div class="row mt centered">
                 <div class="col-lg-6 col-lg-offset-3">
-                    <h1 class="control-label">TruckOwner, please take a minute to sign up.</h1>
+                    <h1 class="control-label">Edit Your Profile.</h1>
                     <form id="signUp" method="post" class="form-inline" enctype="multipart/form-data">
                         <div class="form-group">
-                            <input id="foodTruckName" type="text" name="FoodTruckName" class="form-control" placeholder="Name of the food-truck">
-                            <input id="foodTruckLicenseNo" type="text" name="LicenseNumber" class="form-control" placeholder="Food-truck License number">
-                            <input id="foodTruckSpecialityCusine" type="text" name="SpecialityCuisineYouServe" class="form-control" placeholder="Speciality Cuisine You Serve">
+						    <h4 class="control-label1" style="padding-left:35px;">Name: {{firstName}} {{lastName}}</h4>
+							<h4 class="control-label1" style="padding-left:35px;">Email Address: {{EmailAddress}}</h4>
+                            <h4 class="control-label1" style="padding-left:35px;">License Number: {{licenseNumber}}</h4>
+							<input id="foodTruckName" type="text" name="FoodTruckName" class="form-control" placeholder="Name of the food-truck">
+							<input id="foodTruckSpecialityCusine" type="text" name="SpecialityCuisineYouServe" class="form-control" placeholder="Speciality Cuisine You Serve">
                             <input id="foodTruckSpecialityCusineYouServe" type="text" name="SpecialityCuisineILike" class="form-control" placeholder="Cuisine I Like">
-							<h4 class="control-label1" style="margin-left:135px">Please select your operating hours</h4>
+                            <h4 class="control-label1" style="margin-left:135px">Please select your operating hours</h4>
                             <div id="hourForm" style="color: #ffffff; margin-left: 70px;margin-bottom: 10px">
                                 <h5 class="control-label1" style="margin-left:65px">Weekdays</h5>
                                 <div id="Weekday" class="day"></div>
@@ -78,20 +81,19 @@
                             <textarea id="foodTruckAboutMe" rows="4" cols="50" name="AboutMe" class="form-control" placeholder="About me"></textarea>
                             <input type="file" name="image" class="form-control">
                             <br>
-                           <input id = "currentlatitude" type = "hidden" class="form-control" name="currentlatitude">
-                            <input id = "currentlongitude" type = "hidden"  class="form-control" name="currentlongitude">
-                            <button id="btnsignup" type="button" class="btn btn-warning btn-lg joinbtn" onclick="signUp()">GET STARTED</button>
+                            <button id="btnsignup" type="button" class="btn btn-warning btn-lg joinbtn" onclick="signUp()">SAVE</button>
                         </div>
 	            	</form>
                 </div>
             </div>
         </div>
-    </div>
+
     <div class="container">
         <hr>
         <p class="footer centered" style="font-weight: bolder;">©2014 TruckStop &nbsp; &nbsp;Created by sAaPkUnUvA</p>
         <p class="footer centered" style="font-weight: bolder;"></p>
     </div><!-- /container -->
+</div>
     <!-- Bootstrap core JavaScript
   ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
@@ -171,6 +173,12 @@
             $("#foodTruckAboutMe").attr('placeholder', "Please provide your description");
             $("#foodTruckAboutMe").addClass("errorplaceHolder");
         }
+		if($("#foodTruckSpecialityCusineYouServe").val() == ""){
+            $("#foodTruckSpecialityCusineYouServe").addClass("errorClass");
+            $("#foodTruckSpecialityCusineYouServe").attr('placeholder', "Please Provide Cuisine You Serve");
+            $("#foodTruckSpecialityCusineYouServe").addClass("errorplaceHolder");
+        }
+		
         else {
             var weekdayHoursFrom = document.getElementsByName('WeekdayFromH').value;
             var weekdayMinutesFrom = document.getElementsByName('WeekdayFromM').value;

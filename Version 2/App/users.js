@@ -61,11 +61,11 @@ function UsersDAO(db) {
         });
 		}
 		
-		this.addTruckUserProfile = function(userID, foodTruckName, licenseNumber, specialityCuisine, operatingHours, aboutMe, profileImage, callback) {
+		this.addTruckUserProfile = function(userID, foodTruckName, licenseNumber, specialityCuisineYouServe, SpecialityCuisineILike, operatingHours, aboutMe, profileImage, currentLatitude, currentLongitude, callback) {
 		"use strict";
 		
 		
-		var truckUserProfileInfo = {$set : {'food_truck_name': foodTruckName, 'license_number': licenseNumber, 'speciality_cuisine': specialityCuisine, 'operating_hours': operatingHours, 'about_me': aboutMe}};
+		var truckUserProfileInfo = {$set : {'food_truck_name': foodTruckName, 'license_number': licenseNumber, 'whatyouserve': specialityCuisineYouServe,'whatilike': SpecialityCuisineILike, 'operating_hours': operatingHours, 'about_me': aboutMe, 'latitude' : currentLatitude, 'longitude': currentLongitude}};
 		
 		var data = fs.readFileSync(profileImage.path);
 		var image = new MongoDb.Binary(data);
@@ -97,15 +97,7 @@ function UsersDAO(db) {
         });
     }
 
-/*
-    this.findTruckLocations = function (callback) {
-        trucks.find({}, function(err, truck){
-            callback(err, user);
-        });
-    }
-*/
-
-this.getTrucks = function(num,userLatitude, userLongitude, callback) {
+		this.getTrucks = function(num,userLatitude, userLongitude, callback) {
         "use strict";
 
         trucks.find().sort('_id', -1).limit(num).toArray(function(err, items) {
@@ -132,7 +124,7 @@ this.getTrucks = function(num,userLatitude, userLongitude, callback) {
                         console.log(distances.rows[0].elements[0].distance.value);
                     var distanceValue = distances.rows[0].elements[0].distance.value;
                     console.log(value.name + " has a distance of " + distanceValue);
-                    if(distanceValue < 6700){
+                    if(distanceValue < 10000){
                         console.log("Printing distance value "+distanceValue)
                         finalArray.push(value);
                         console.log("Prinitng finalArray inside if loop " + finalArray)
@@ -241,7 +233,33 @@ this.getTrucksByTags = function (words, results, callback1) {
         
         var userImageInfo = {'_id': userID, 'image': image, 'image_type': imageType, 'image_name': imageName}
 
+        users.update(query, userprofileinfo, function(err, result){
+               console.log(image);
+            if(profileImage.size != 0){
+                console.log("Executing if");
 
+               userImages.save(userImageInfo, function(err, result){ 
+                callback(err, userprofileinfo); 
+            });
+           }
+            else {
+                console.log("Executing else");
+                callback(err, userprofileinfo);
+            }
+        });
+    }
+	
+	this.truckOwnerEditProfile = function(userID, WhatILike, foodTruckName, whatiserve, aboutMe, operatingHours, profileImage, callback) {
+        
+        var userprofileinfo = {$set: {'food_truck_name': foodTruckName, 'whatyouserve': whatiserve,'whatilike': WhatILike, 'operating_hours': operatingHours, 'about_me': aboutMe}};
+        var query = {_id: userID};
+
+        var data = fs.readFileSync(profileImage.path);
+        var image = new MongoDb.Binary(data);
+        var imageType = profileImage.type;
+        var imageName = profileImage.name;
+        
+        var userImageInfo = {'_id': userID, 'image': image, 'image_type': imageType, 'image_name': imageName}
 
         users.update(query, userprofileinfo, function(err, result){
                console.log(image);
@@ -256,8 +274,6 @@ this.getTrucksByTags = function (words, results, callback1) {
                 console.log("Executing else");
                 callback(err, userprofileinfo);
             }
-            
-    
         });
     }
 
