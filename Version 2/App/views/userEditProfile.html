@@ -36,7 +36,9 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><button type="submit" class="btn btn-warning btn-header">LOGOUT</button></li>
+                <li>
+                    <form action="/userDashboard"><button type="submit" class="btn btn-warning btn-header" style="margin-right: 12px">HOME</button></form></li>&nbsp;
+                <li><form action="/logout"><button type="submit" class="btn btn-warning btn-header">LOGOUT</button></form></li>
             </ul>
             <ul class="nav navbar-nav navbar-left">
                 <li><input type="text" class="form-control-header-rounded col-lg-push-1" placeholder="Search"></li>
@@ -62,7 +64,6 @@
                     <div class="form-group">
                         <input id="name" type="text" name="FoodTruckName" class="form-control" placeholder="{{firstName}} {{lastName}}" disabled>
                         <input id="emailAddress" type="text" name="emailAddress" class="form-control" placeholder="{{emailAddress}}" disabled>
-                        <input id="choices" type="text" name="choices" class="form-control" placeholder="Please enter your choices">
                         <input id="WhatILike" type="text" name="WhatILike" class="form-control" placeholder="Please enter your Speciality Cuisine">
                         <br>
                         <select id="seldistance" name="Distance" class="form-control" style="width:280px;">
@@ -82,12 +83,12 @@
             </div>
         </div>
     </div>
-</div>
 <div class="container">
     <hr>
     <p class="footer centered" style="font-weight: bolder;">©2014 TruckStop &nbsp; &nbsp;Created by sAaPkUnUvA</p>
     <p class="footer centered" style="font-weight: bolder;"></p>
 </div><!-- /container -->
+</div>
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
