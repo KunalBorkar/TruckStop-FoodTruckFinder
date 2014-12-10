@@ -7,21 +7,15 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="shortcut icon" href="assets/img/favicon.png">
-
-    <title>Truck Owner Sign Up</title>
-
+    <title>User Edit Profile</title>
     <link rel="stylesheet" type="text/css" href="assets/css/demo.css" />
     <link rel="stylesheet" type="text/css" href="assets/css/style1.css" />
-
     <!-- Bootstrap core CSS -->
     <link href="assets/css/bootstrap.css" rel="stylesheet">
-
     <!-- Custom styles for this template -->
     <link href="assets/css/main.css" rel="stylesheet">
-
     <!-- Fonts from Google Fonts -->
     <link href='http://fonts.googleapis.com/css?family=Lato:300,400,900' rel='stylesheet' type='text/css'>
-
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -102,25 +96,15 @@
 <script type="text/javascript" src="assets/js/modernizr.custom.86080.js"></script>
 <script type="text/javascript">
     function validateEditProfile(){
-        if($("#name").val() == "") {
-            $("#name").addClass("errorClass");
-            $("#name").attr('placeholder', "Please provide Name");
-            $("#name").addClass("errorplaceHolder");
-        }
-        if($("#emailAddress").val() == "") {
-            $("#emailAddress").addClass("errorClass");
-            $("#emailAddress").attr('placeholder', "Please provide Email Address");
-            $("#emailAddress").addClass("errorplaceHolder");
-        }
         if($("#choices").val() == "") {
             $("#choices").addClass("errorClass");
             $("#choices").attr('placeholder', "Please provide choices");
             $("#choices").addClass("errorplaceHolder");
         }
-        if($("#cuisines").val() == "") {
-            $("#cuisines").addClass("errorClass");
-            $("#cuisines").attr('placeholder', "Please provide speciality cuisines");
-            $("#cuisines").addClass("errorplaceHolder");
+        if($("#WhatILike").val() == "") {
+            $("#WhatILike").addClass("errorClass");
+            $("#WhatILike").attr('placeholder', "Please provide speciality cuisines");
+            $("#WhatILike").addClass("errorplaceHolder");
         }
         else {
             document.forms["editprofile"].submit();
