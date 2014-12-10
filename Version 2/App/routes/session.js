@@ -214,7 +214,7 @@ function SessionHandler (db) {
 	var currentLatitude = req.userLatitude;
     var currentLongitude = req.userLongitude;
 	
-	var operatingHours = "Weekday = " + req.body.WeekdayFromH + req.body.WeekdayFromM + " " +req.body.WeekdayFromAP + " To " + req.body.WeekdayToH + req.body.WeekdayToM + " " +req.body.WeekdayToAP + "Weekend = " + req.body.WeekendFromH + req.body.WeekendFromM + " " +req.body.WeekendFromAP + " To "+ req.body.WeekendToH + req.body.WeekendToM + " " +req.body.WeekendToAP ; 
+	var operatingHours = " Weekday = " + req.body.WeekdayFromH + req.body.WeekdayFromM + " " +req.body.WeekdayFromAP + " To " + req.body.WeekdayToH + req.body.WeekdayToM + " " +req.body.WeekdayToAP + " Weekend = " + req.body.WeekendFromH + req.body.WeekendFromM + " " +req.body.WeekendFromAP + " To "+ req.body.WeekendToH + req.body.WeekendToM + " " +req.body.WeekendToAP ; 
 
 	users.addTruckUserProfile(userID, foodTruckName, licenseNumber, specialityCuisineYouServe, SpecialityCuisineILike, operatingHours, aboutMe, profileImage, currentLatitude, currentLongitude, function(err, user) {
                 "use strict";

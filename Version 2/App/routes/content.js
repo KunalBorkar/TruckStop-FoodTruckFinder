@@ -230,7 +230,7 @@ function ContentHandler (db) {
 					}
 				}
 					var foodTruckOwnerName = foodTruckInfo['firstName'] + " " + foodTruckInfo['lastName']
-					return res.render('foodTruck', {'foodTruckName' : foodTruckInfo['food_truck_name'], 'foodTruckOwner': foodTruckOwnerName, 'aboutMe': foodTruckInfo['about_me'], 'cuisine': foodTruckInfo['speciality_cuisine'], 'operatingHours': foodTruckInfo['operating_hours'], 'foodTruckUserID': foodTruckInfo['_id']});
+					return res.render('foodTruck', {'foodTruckName' : foodTruckInfo['food_truck_name'], 'foodTruckOwner': foodTruckOwnerName, 'aboutMe': foodTruckInfo['about_me'], 'cuisine': foodTruckInfo['whatyouserve'], 'operatingHours': foodTruckInfo['operating_hours'], 'foodTruckUserID': foodTruckInfo['_id']});
 			});
 		}
 		else
