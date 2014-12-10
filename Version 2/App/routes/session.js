@@ -342,7 +342,27 @@ function SessionHandler (db) {
 	});
 	}
 	
-	this.displayUnsuscribePage = function(req, res, next) {
+	this.displayUnsuscribePageForTruckOwner = function(req, res, next) {
+	console.log(req.cookies.session);
+	console.log("Hellooooooooo")
+	users.unsubscribe( req.username, req.body.userSubscription, function (err, unsubscribed )
+	{
+		if (err) {
+                    // this was a duplicate
+                    if (err.code == '11000') {
+                        errors['email_error'] = "This Email Address is already Signed Up!!";
+                        return res.render("FirstPage", errors);
+                    }
+                    // this was a different error
+                    else {
+                        return next(err);
+                    }
+                }
+		res.redirect('/truckOwnerDashboard');
+		});
+		}
+	
+	this.displayUnsuscribePageForUser = function(req, res, next) {
 	console.log(req.cookies.session);
 	users.unsubscribe( req.username, req.body.userSubscription, function (err, unsubscribed )
 	{
@@ -357,9 +377,9 @@ function SessionHandler (db) {
                         return next(err);
                     }
                 }
-		res.redirect('/subscriptions');
+		res.redirect('/userDashboard');
 		});
-		}
+	}
 		
 		this.searchTrucksForUser = function (req, res, next) {
         "use strict";

@@ -89,14 +89,12 @@
 <script type="text/javascript">
     var map;
     function initialize() {
-
         var mapOptions = {
             zoom: 13,
             center: new google.maps.LatLng("{{userLatitude}}", "{{userLongitude}}")
         };
         map = new google.maps.Map(document.getElementById('map-canvas'),
                 mapOptions);
-
         var infowindow1 = new google.maps.InfoWindow();
         var marker1 = new google.maps.Marker({
             position: new google.maps.LatLng("{{userLatitude}}", "{{userLongitude}}"),
@@ -107,15 +105,12 @@
             infowindow1.setContent('You are here');
             infowindow1.open(map,marker1);
         });
-
         var infowindow = new google.maps.InfoWindow();
-
         var marker, i=0;
         marker = new google.maps.Marker({
             position: new google.maps.LatLng("{{truckLatitude}}", "{{truckLongitude}}"),
             map: map
         });
-
         google.maps.event.addListener(marker, 'click', (function(marker, i) {
             return function() {
                 infowindow.setContent("{{foodTruckName}}");

@@ -47,8 +47,12 @@ module.exports = exports = function(app, db) {
     app.get("/userDashboard", contentHandler.displayUserDashboardPage);
 	app.post("/userDashboard", sessionHandler.searchTrucksForUser);
 
-	app.get("/subscriptions", contentHandler.displaySubscriptionPage);
-	app.post("/subscriptions", sessionHandler.displayUnsuscribePage);
+	app.get("/userSubscriptions", contentHandler.displayUserSubscriptionPage);
+	app.post("/userSubscriptions", sessionHandler.displayUnsuscribePageForUser);
+	
+	app.get("/truckOwnerSubscriptions", contentHandler.displayTruckOwnerSubscriptionPage);
+	app.post("/truckOwnerSubscriptions", sessionHandler.displayUnsuscribePageForTruckOwner);
+	
 	
 	app.get("/searchFoodTrucks", contentHandler.displaySearchPage);
 	

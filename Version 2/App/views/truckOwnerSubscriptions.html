@@ -92,11 +92,11 @@
                     <div class="form-group">
 
             <h1 class="control-label">Manage Your Subscriptions!</h1>
-                <form method="post" class="form-inline" role="form" action="/subscriptions">
     		<p><h3 class="control-label1">{{ noSubscription }}</h3></p>
-            <form action="/userDashboard">
+            <form action="/truckOwnerDashboard">
 				<button id="btnsignup" type="submit" class="btn btn-warning btn-lg joinbtn">ADD NEW SUBSCRIPTIONS </button>
 			</form>
+
 
              <ul>
                  <h3 class="control-label1">{% for userSubscription in userSubscriptions %}
@@ -113,11 +113,8 @@
 		<form method="post" id="userSubscriptionForm">
 			<input id="subscription" type="hidden" name="userSubscription">
 		</form>
-		<form action="/userDashboard">
+		<form action="/truckOwnerDashboard">
             <button id="btnsignup" type="submit" class="btn btn-warning btn-lg joinbtn">HOME</button>
-		</form>
-            </h3>
-			<!--<input type="submit" value="Home"/>-->
 		</form>
 
 

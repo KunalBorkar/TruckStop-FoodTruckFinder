@@ -79,7 +79,48 @@ function ContentHandler (db) {
 		}
     }
 	
-	this.displaySubscriptionPage = function(req, res, next) {
+	this.displayTruckOwnerSubscriptionPage = function(req, res, next) {
+        "use strict";
+		if(req.cookies.session.length!=0)
+		{
+			console.log("Hiiiiiiiiiiiiiiiiiiiiii")
+		users.getSubscriptions(req.username, function(err, subscriptions) {
+			if (err) {
+                    // this was a duplicate
+                    if (err.code == '11000') {
+                        errors['email_error'] = "This Email Address is already Signed Up!!";
+                        return res.render("truckstop", errors);
+                    }
+                    // this was a different error
+                    else {
+                        return next(err);
+                    }
+                }
+				//var subscriptionLength = subscriptions.subscription.length;
+				if(subscriptions.subscription == null)
+				{
+					return res.render('truckOwnerSubscriptions', {'noSubscription' : "You Dont have any subscriptions!! Add Now"});
+				}
+				else 
+				{
+                    if(subscriptions.subscription.length == 0)
+                    {
+                        return res.render('truckOwnerSubscriptions', {'noSubscription' : "You Dont have any subscriptions!! Add Now"});
+                    }
+                    else{
+                        return res.render('truckOwnerSubscriptions', {'userSubscriptions' : subscriptions['subscription']});
+                    }
+
+				}
+			});
+			}
+		else
+		{
+			return res.redirect('/');
+		}
+	}
+	
+	this.displayUserSubscriptionPage = function(req, res, next) {
         "use strict";
 		if(req.cookies.session.length!=0)
 		{
@@ -117,7 +158,8 @@ function ContentHandler (db) {
 		{
 			return res.redirect('/');
 		}
-		}
+	}
+
 
    
 
@@ -230,7 +272,7 @@ function ContentHandler (db) {
 					}
 				}
 					var foodTruckOwnerName = foodTruckInfo['firstName'] + " " + foodTruckInfo['lastName']
-                    console.log("Printing users locatitude and longitude " + req.userLatitude + " " + req.userLongitude);
+					console.log("Printing users locatitude and longitude " + req.userLatitude + " " + req.userLongitude);
 					return res.render('foodTruck', {'foodTruckName' : foodTruckInfo['food_truck_name'], 'foodTruckOwner': foodTruckOwnerName, 'aboutMe': foodTruckInfo['about_me'], 'cuisine': foodTruckInfo['whatyouserve'], 'operatingHours': foodTruckInfo['operating_hours'], 'foodTruckUserID': foodTruckInfo['_id'], 'userLatitude' : req.userLatitude, 'userLongitude' : req.userLongitude, 'truckLatitude' : foodTruckInfo['latitude'] , 'truckLongitude' : foodTruckInfo['longitude']});
 			});
 		}
