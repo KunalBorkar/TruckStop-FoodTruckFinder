@@ -7,15 +7,21 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="shortcut icon" href="assets/img/favicon.png">
-    <title>User Edit Profile</title>
+
+    <title>Truck Owner Sign Up</title>
+
     <link rel="stylesheet" type="text/css" href="assets/css/demo.css" />
     <link rel="stylesheet" type="text/css" href="assets/css/style1.css" />
+
     <!-- Bootstrap core CSS -->
     <link href="assets/css/bootstrap.css" rel="stylesheet">
+
     <!-- Custom styles for this template -->
     <link href="assets/css/main.css" rel="stylesheet">
+
     <!-- Fonts from Google Fonts -->
     <link href='http://fonts.googleapis.com/css?family=Lato:300,400,900' rel='stylesheet' type='text/css'>
+
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -36,9 +42,7 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <form action="/userDashboard"><button type="submit" class="btn btn-warning btn-header" style="margin-right: 12px">HOME</button></form></li>&nbsp;
-                <li><form action="/logout"><button type="submit" class="btn btn-warning btn-header">LOGOUT</button></form></li>
+                <li><button type="submit" class="btn btn-warning btn-header">LOGOUT</button></li>
             </ul>
             <ul class="nav navbar-nav navbar-left">
                 <li><input type="text" class="form-control-header-rounded col-lg-push-1" placeholder="Search"></li>
@@ -64,6 +68,7 @@
                     <div class="form-group">
                         <input id="name" type="text" name="FoodTruckName" class="form-control" placeholder="{{firstName}} {{lastName}}" disabled>
                         <input id="emailAddress" type="text" name="emailAddress" class="form-control" placeholder="{{emailAddress}}" disabled>
+                        <input id="choices" type="text" name="choices" class="form-control" placeholder="Please enter your choices">
                         <input id="WhatILike" type="text" name="WhatILike" class="form-control" placeholder="Please enter your Speciality Cuisine">
                         <br>
                         <select id="seldistance" name="Distance" class="form-control" style="width:280px;">
@@ -83,12 +88,12 @@
             </div>
         </div>
     </div>
+</div>
 <div class="container">
     <hr>
     <p class="footer centered" style="font-weight: bolder;">©2014 TruckStop &nbsp; &nbsp;Created by sAaPkUnUvA</p>
     <p class="footer centered" style="font-weight: bolder;"></p>
 </div><!-- /container -->
-</div>
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
@@ -97,15 +102,25 @@
 <script type="text/javascript" src="assets/js/modernizr.custom.86080.js"></script>
 <script type="text/javascript">
     function validateEditProfile(){
+        if($("#name").val() == "") {
+            $("#name").addClass("errorClass");
+            $("#name").attr('placeholder', "Please provide Name");
+            $("#name").addClass("errorplaceHolder");
+        }
+        if($("#emailAddress").val() == "") {
+            $("#emailAddress").addClass("errorClass");
+            $("#emailAddress").attr('placeholder', "Please provide Email Address");
+            $("#emailAddress").addClass("errorplaceHolder");
+        }
         if($("#choices").val() == "") {
             $("#choices").addClass("errorClass");
             $("#choices").attr('placeholder', "Please provide choices");
             $("#choices").addClass("errorplaceHolder");
         }
-        if($("#WhatILike").val() == "") {
-            $("#WhatILike").addClass("errorClass");
-            $("#WhatILike").attr('placeholder', "Please provide speciality cuisines");
-            $("#WhatILike").addClass("errorplaceHolder");
+        if($("#cuisines").val() == "") {
+            $("#cuisines").addClass("errorClass");
+            $("#cuisines").attr('placeholder', "Please provide speciality cuisines");
+            $("#cuisines").addClass("errorplaceHolder");
         }
         else {
             document.forms["editprofile"].submit();

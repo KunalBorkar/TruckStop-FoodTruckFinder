@@ -28,7 +28,6 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
 </head>
-<<<<<<< HEAD
 <body onpageshow="getLocation()">
     <div class="navbar navbar-default navbar-fixed-top">
         <div class="container">
@@ -265,102 +264,6 @@
 
         }else{
 //            alert("Sorry, browser does not support geolocation!");
-=======
-<body>
-<div class="navbar navbar-default navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <h1 class="navbar-brand"><b>TruckStop</b></h1>
-            <!--<a class="navbar-brand" href="#"><b>TruckStop</b></a>-->
-        </div>
-        <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav navbar-right">
-                <li><button type="submit" class="btn btn-warning btn-header">LOGOUT</button></li>
-            </ul>
-            <ul class="nav navbar-nav navbar-left">
-                <li><input type="text" class="form-control-header-rounded col-lg-push-1" placeholder="Search"></li>
-                <li><button type="submit" class="btn btn-warning btn-header">SEARCH</button></li>
-            </ul>
-        </div><!--/.nav-collapse -->
-    </div>
-</div>
-<div id="headerwrap">
-    <ul class="cb-slideshow">
-        <li><span>Image 01</span><div><h3></h3></div></li>
-        <li><span>Image 02</span><div><h3></h3></div></li>
-        <li><span>Image 03</span><div><h3></h3></div></li>
-        <li><span>Image 04</span><div><h3></h3></div></li>
-        <li><span>Image 05</span><div><h3></h3></div></li>
-        <li><span>Image 06</span><div><h3></h3></div></li>
-    </ul>
-    <div id="mapdiv" class="container">
-        <div class="row mt centered">
-            <div class="col-lg-6 col-lg-offset-3">
-                <h1 class="control-label">Edit Profile</h1>
-                <form id="editprofile" method="post" class="form-inline" role="form">
-                    <div class="form-group">
-                        <input id="name" type="text" name="FoodTruckName" class="form-control" placeholder="Please enter Food-truck Name" disabled>
-                        <input id="emailAddress" type="text" name="emailAddress" class="form-control" placeholder="Please enter your Email address" disabled>
-                        <input id="choices" type="text" name="choices" class="form-control" placeholder="Please enter your choices">
-                        <input id="cuisines" type="text" name="Cuisines" class="form-control" placeholder="Please enter your Speciality Cuisine">
-                        <br>
-                        <select id="seldistance" name="Distance" class="form-control" style="width:280px;">
-                            <option value="selectdistance">Select Distance in miles</option>
-                            <option value="one">1</option>
-                            <option value="two">2</option>
-                            <option value="three">3</option>
-                            <option value="four">4</option>
-                            <option value="five">5</option>
-                        </select>
-                        <br>
-                        <button id="btnsignup" type="button" class="btn btn-warning btn-lg joinbtn" onclick="validateEditProfile()">SAVE</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-<div class="container">
-    <hr>
-    <p class="footer centered" style="font-weight: bolder;">©2014 TruckStop &nbsp; &nbsp;Created by sAaPkUnUvA</p>
-    <p class="footer centered" style="font-weight: bolder;"></p>
-</div><!-- /container -->
-</div>
-<!-- Bootstrap core JavaScript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
-<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-<script src="assets/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="assets/js/modernizr.custom.86080.js"></script>
-<script type="text/javascript">
-    function validateEditProfile(){
-        if($("#name").val() == "") {
-            $("#name").addClass("errorClass");
-            $("#name").attr('placeholder', "Please provide Name");
-            $("#name").addClass("errorplaceHolder");
-        }
-        if($("#emailAddress").val() == "") {
-            $("#emailAddress").addClass("errorClass");
-            $("#emailAddress").attr('placeholder', "Please provide Email Address");
-            $("#emailAddress").addClass("errorplaceHolder");
-        }
-        if($("#choices").val() == "") {
-            $("#choices").addClass("errorClass");
-            $("#choices").attr('placeholder', "Please provide choices");
-            $("#choices").addClass("errorplaceHolder");
-        }
-        if($("#cuisines").val() == "") {
-            $("#cuisines").addClass("errorClass");
-            $("#cuisines").attr('placeholder', "Please provide speciality cuisines");
-            $("#cuisines").addClass("errorplaceHolder");
-        }
-        else {
-            document.forms["editprofile"].submit();
->>>>>>> origin/master
         }
     }
 </script>
