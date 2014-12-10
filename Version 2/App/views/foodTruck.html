@@ -91,21 +91,20 @@
     function initialize() {
 
         var mapOptions = {
-            zoom: 15,
-            center: new google.maps.LatLng("{{latitude}}", "{{longitude}}")
+            zoom: 13,
+            center: new google.maps.LatLng("{{userLatitude}}", "{{userLongitude}}")
         };
         map = new google.maps.Map(document.getElementById('map-canvas'),
                 mapOptions);
 
-        var infowindow1 = new google.maps.InfoWindow({
-        });
+        var infowindow1 = new google.maps.InfoWindow();
         var marker1 = new google.maps.Marker({
             position: new google.maps.LatLng("{{userLatitude}}", "{{userLongitude}}"),
             map: map,
             title: 'Currently you are here'
         });
         google.maps.event.addListener(marker1, 'click', function() {
-            infowindow1.setContent('<h3>'+ 'TestingLink'+'</h3>'+'<a href="http://stackoverflow.com/questions/6749104/opening-a-webpage-in-lightbox">'+'TestingLink'+'</a>');
+            infowindow1.setContent('You are here');
             infowindow1.open(map,marker1);
         });
 
@@ -119,7 +118,7 @@
 
         google.maps.event.addListener(marker, 'click', (function(marker, i) {
             return function() {
-                infowindow.setContent("{{truckName}}");
+                infowindow.setContent("{{foodTruckName}}");
                 infowindow.open(map, marker);
                 i++;
             }

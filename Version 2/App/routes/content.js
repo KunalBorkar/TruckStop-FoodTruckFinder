@@ -230,7 +230,8 @@ function ContentHandler (db) {
 					}
 				}
 					var foodTruckOwnerName = foodTruckInfo['firstName'] + " " + foodTruckInfo['lastName']
-					return res.render('foodTruck', {'foodTruckName' : foodTruckInfo['food_truck_name'], 'foodTruckOwner': foodTruckOwnerName, 'aboutMe': foodTruckInfo['about_me'], 'cuisine': foodTruckInfo['whatyouserve'], 'operatingHours': foodTruckInfo['operating_hours'], 'foodTruckUserID': foodTruckInfo['_id']});
+                    console.log("Printing users locatitude and longitude " + req.userLatitude + " " + req.userLongitude);
+					return res.render('foodTruck', {'foodTruckName' : foodTruckInfo['food_truck_name'], 'foodTruckOwner': foodTruckOwnerName, 'aboutMe': foodTruckInfo['about_me'], 'cuisine': foodTruckInfo['whatyouserve'], 'operatingHours': foodTruckInfo['operating_hours'], 'foodTruckUserID': foodTruckInfo['_id'], 'userLatitude' : req.userLatitude, 'userLongitude' : req.userLongitude, 'truckLatitude' : foodTruckInfo['latitude'] , 'truckLongitude' : foodTruckInfo['longitude']});
 			});
 		}
 		else
