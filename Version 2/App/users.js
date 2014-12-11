@@ -100,7 +100,7 @@ function UsersDAO(db) {
 		this.getTrucks = function(num,userLatitude, userLongitude, callback) {
         "use strict";
 
-        trucks.find().sort('_id', -1).limit(num).toArray(function(err, items) {
+        trucks.find().sort('_id', -1).limit(100).toArray(function(err, items) {
             "use strict";
 
             if (err) return callback(err, null);
@@ -124,7 +124,7 @@ function UsersDAO(db) {
                         console.log(distances.rows[0].elements[0].distance.value);
                     var distanceValue = distances.rows[0].elements[0].distance.value;
                     console.log(value.name + " has a distance of " + distanceValue);
-                    if(distanceValue < 10000){
+                    if(distanceValue < 15000){
                         console.log("Printing distance value "+distanceValue)
                         finalArray.push(value);
                         console.log("Prinitng finalArray inside if loop " + finalArray)
@@ -141,10 +141,10 @@ function UsersDAO(db) {
         });
     }
 	
-	this.addTodaysInformation = function (userID, todayMenu, todaysMenuTags, callback) {
+	this.addTodaysInformation = function (userID, foodTruckName,todayMenu, todaysMenuTags, latitude, longitude, callback) {
 		
-		today.update({'_id': userID}, {$set : {'menu': todayMenu, 'cuisine': todaysMenuTags}}, {upsert: true}, function (err, todaysInfo) {
-			callback(err, todaysInfo);
+		today.update({'_id': userID}, {$set: {'menu': todayMenu, 'foodTruckName': foodTruckName, 'cuisine': todaysMenuTags, 'latitude': latitude, 'longitude': longitude}}, {upsert: true}, function (err, todaysInfo) {
+                callback(err, todaysInfo);
 		});
 	}
 
@@ -284,6 +284,31 @@ this.getTrucksByTags = function (words, results, callback1) {
 		});
 	}
 
+	 this.findResults = function(userId, callback) {
+       
+        users.findOne({ '_id' : userId}, function(err, user){
+           callback(err, user);
+       });       
+
+
+       
+   }
+this.getFoodTruckName = function(userID, callback) {
+
+        users.findOne({'_id':userID}, function (err, foodTruckName) {
+            callback(err, foodTruckName.food_truck_name);
+
+        });
+    }
+
+
+   this.findAllTrucks = function(callback){
+       console.log(2);
+       users.find({'truckOwner' : "Yes"}).toArray(function(err, trucks){
+           console.log(3);
+           callback(err, trucks);
+       });   
+   }
     
 }
 

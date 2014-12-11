@@ -78,7 +78,7 @@
                 <ul>
                     {% for userSubscription in userSubscriptions %}
                     <li>
-                        <a href="foodtruck/{{userSubscription}}"> {{ userSubscription }} </a>
+                        <a style="color:green;"href="foodtruck/{{userSubscription}}"> {{ userSubscription }} </a>
                     </li>
                     <br/>
                     {% endfor %}
@@ -118,7 +118,7 @@
             title: 'Currently you are here'
         });
         google.maps.event.addListener(marker1, 'click', function() {
-            infowindow1.setContent('<h3>'+ 'TestingLink'+'</h3>'+'<a href="http://stackoverflow.com/questions/6749104/opening-a-webpage-in-lightbox">'+'TestingLink'+'</a>');
+            infowindow1.setContent("You are here");
             infowindow1.open(map,marker1);
         });
 

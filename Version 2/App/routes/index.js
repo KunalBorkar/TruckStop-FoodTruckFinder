@@ -41,8 +41,8 @@ module.exports = exports = function(app, db) {
 	app.get('/truckOwnerProfile', contentHandler.displayTruckOwnerProfile);
     app.get('/truckOwnerProfile/img/:userId', contentHandler.showImage);
 	
-	app.get('/serveToday', contentHandler.displayServeTodayPage);
-	app.post('/serveToday', sessionHandler.serveToday);
+	app.get('/truckOwnerServeToday', contentHandler.displayServeTodayPage);
+	app.post('/truckOwnerServeToday', sessionHandler.serveToday);
 
     app.get("/userDashboard", contentHandler.displayUserDashboardPage);
 	app.post("/userDashboard", sessionHandler.searchTrucksForUser);

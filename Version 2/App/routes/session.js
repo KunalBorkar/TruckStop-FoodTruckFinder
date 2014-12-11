@@ -326,20 +326,27 @@ function SessionHandler (db) {
 	this.serveToday = function(req, res,next) {
 	"use strict";
 	console.log(req.cookies.session);
-	users.addTodaysInformation(req.username, req.body.todaysMenu, req.body.todaysMenuTags, function (err, todaysInfo) {
-		if (err) {
-                    // this was a duplicate
-                    if (err.code == '11000') {
-                        errors['email_error'] = "This Email Address is already Signed Up!!";
-                        return res.render("truckstop", errors);
-                    }
-                    // this was a different error
-                    else {
-                        return next(err);
-                    }
+    users.getFoodTruckName(req.username, function(err, foodTruckName){
+        users.addTodaysInformation(req.username, foodTruckName ,req.body.todaysMenu, req.body.todaysMenuTags, req.body.latitudeText, req.body.longitudeText, function (err, todaysInfo) {
+            if (err) {
+                // this was a duplicate
+                if (err.code == '11000') {
+                    errors['email_error'] = "This Email Address is already Signed Up!!";
+                    return res.render("FirstPage", errors);
+
+
+
+
+
                 }
-		res.redirect('/truckUserDashboard');
-	});
+                // this was a different error
+                else {
+                    return next(err);
+                }
+            }
+            res.redirect('/truckOwnerDashboard');
+        });
+      });
 	}
 	
 	this.displayUnsuscribePageForTruckOwner = function(req, res, next) {

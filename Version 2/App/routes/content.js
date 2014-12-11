@@ -167,7 +167,7 @@ function ContentHandler (db) {
         "use strict";
 		if(req.cookies.session.length!=0)
 		{
-			return res.render('serveToday');
+				return res.render('truckOwnerServeToday',{'latitude': req.userLatitude, 'longitude': req.userLongitude});
 		}
 		else
 		{
@@ -234,6 +234,7 @@ function ContentHandler (db) {
 		if(req.cookies.session.length!=0)
 		{
             console.log("In user dash if")
+
         users.findLocation(req.username, function(err, user) {
             if (err) {
                 if (err.code == '11000') {
@@ -243,17 +244,48 @@ function ContentHandler (db) {
 
                 else {
 
+
                     return next(err);
                 }
             }
             console.log("In user dash above get trucks")
             users.getTrucks(5,user.latitude, user.longitude, function(err, results) {
                 console.log("Printing results Array "+results);
-                return res.render("userDashboard", {'latitude': user.latitude, 'longitude': user.longitude, 'locations':results, 'userSubscriptions':user.subscription})
-            });
-        });
-
-		}
+                users.findResults(req.username, function(err, userRecommendations) {
+               "use strict";
+               var whatILike = user.whatilike;
+               var likes = whatILike.split(" ");
+               var result= [];
+               var count = 0;
+               var finalArray = [];
+               users.findAllTrucks(function(err, trucks){
+                   console.log("1");
+                       trucks.forEach(function(doc){
+                           
+                       //if(doc['truckOwner'] == "Yes")
+                           var cuisine = doc['whatyouserve'];
+                       //console.log(cuisine);
+                       var isTruckAdded = false;
+                       likes.forEach(function (word){
+                           if(cuisine.indexOf(word) >= 0 && isTruckAdded == false){
+                               finalArray.push(doc['food_truck_name']);
+                               console.log(doc['foodtruck_name']);
+                               //console.log(doc);
+                               isTruckAdded = true;
+                           }
+                       count++;
+               if(count == (trucks.length * likes.length))
+               {   
+                    console.log(finalArray);
+				return res.render("userDashboard", {'latitude': user.latitude, 'longitude': user.longitude, 'locations':results, 'userSubscriptions':user.subscription, 'finalArray' : finalArray})
+				}
+           });
+       });
+                   });
+           });
+		});
+       });
+	}
 		else
 		{
 			return res.redirect('/');

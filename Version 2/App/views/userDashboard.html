@@ -90,6 +90,14 @@
                 </div>
                 <div class="col-lg-3">
                     <h1 class="control-label">Recommendations</h1>
+					<ul>
+                        {% for ft in finalArray %}
+                        <li>
+                            <h3>{{ft}}</h3>
+                        </li>
+                        <br/>
+                        {% endfor %}
+                    </ul>
                 </div>
             </div>
         </div>
