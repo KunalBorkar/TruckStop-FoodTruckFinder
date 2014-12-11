@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="shortcut icon" href="assets/img/favicon.png">
+    <link rel="shortcut icon" href="assets/img/favicon.ico">
 
     <title>User Dashboard</title>
 
@@ -44,12 +44,9 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
-<form class="control-label" role="form" action="/logout">
-                    <li><button type="submit" class="btn btn-warning btn-header">LOGOUT</button></li>
-</form>
-<form class="control-label" role="form" action="/userProfile">
-				<li><button type="submit" class="btn btn-warning btn-header">PROFILE</button></li>
-</form>
+<li><form class="control-label" role="form" action="/userProfile"><button type="submit" class="btn btn-warning btn-header" style="margin-right: 12px;">PROFILE</button></form></li>
+
+                        <li><form class="control-label" role="form" action="/logout"><button type="submit" class="btn btn-warning btn-header">LOGOUT</button></form></li>
                 </ul>
 				<form id="searchForm" method="post">
 					<ul class="nav navbar-nav navbar-left">
@@ -81,7 +78,7 @@
                     <ul>
                         {% for userSubscription in userSubscriptions %}
                         <li>
-                            <a href="foodtruck/{{userSubscription}}"> {{ userSubscription }} </a>
+                            <h3><u><a style="color:green;" href="foodtruck/{{userSubscription}}"> {{ userSubscription }} </a></u></h3>
                         </li>
                         <br/>
                         {% endfor %}
@@ -92,7 +89,7 @@
                     <div id="map-canvas" style="width: 600px; height: 400px"></div>
                 </div>
                 <div class="col-lg-3">
-                    <h1 class="control-label">Hihsdfgsdf</h1>
+                    <h1 class="control-label">Recommendations</h1>
                 </div>
             </div>
         </div>

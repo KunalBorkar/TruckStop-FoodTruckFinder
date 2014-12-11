@@ -230,8 +230,10 @@ function ContentHandler (db) {
 
     this.displayUserDashboardPage = function(req, res, next) {
         "use strict";
+        console.log("In user dash")
 		if(req.cookies.session.length!=0)
 		{
+            console.log("In user dash if")
         users.findLocation(req.username, function(err, user) {
             if (err) {
                 if (err.code == '11000') {
@@ -244,6 +246,7 @@ function ContentHandler (db) {
                     return next(err);
                 }
             }
+            console.log("In user dash above get trucks")
             users.getTrucks(5,user.latitude, user.longitude, function(err, results) {
                 console.log("Printing results Array "+results);
                 return res.render("userDashboard", {'latitude': user.latitude, 'longitude': user.longitude, 'locations':results, 'userSubscriptions':user.subscription})

@@ -6,9 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="shortcut icon" href="assets/img/favicon.png">
+    <link rel="shortcut icon" href="assets/img/favicon.ico">
 
     <title>Welcome to TruckStop</title>
+
+    <link rel="stylesheet" type="text/css" href="assets/css/social-buttons.css"/>
+    <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css"/>
 
     <link rel="stylesheet" type="text/css" href="assets/css/demo.css" />
     <link rel="stylesheet" type="text/css" href="assets/css/style1.css" />
@@ -41,7 +44,6 @@
                 <span class="icon-bar"></span>
             </button>
             <h1 class="navbar-brand"><b>TruckStop</b></h1>
-            <!--<a class="navbar-brand" href="#"><b>TruckStop</b></a>-->
         </div>
         <form id="login" method="post">
             <div class="navbar-collapse collapse">
@@ -79,13 +81,19 @@
     </ul>
     <div class="container">
         <div class="row">
+            <div id="socialmedia" style="position: fixed; margin-left: -90px;">
+                <button class="btn btn-facebook" type="button" onclick="gotoFacebook()"><i class="fa fa-facebook"></i></button><br>
+                <button class="btn btn-twitter"><i class="fa fa-twitter" onclick="gotoTwitter()"></i></button><br>
+                <button class="btn btn-pinterest"><i class="fa fa-pinterest" onclick="gotoPintreset()"></i></button><br>
+                <button class="btn btn-instagram"><i class="fa fa-instagram" onclick="gotoInstagram()"></i></button><br>
+                <button class="btn btn-google-plus"><i class="fa fa-google-plus" onclick="gotoGooglePlus()"></i></button>
+            </div>
             <a href="#signupdiv">
-                <h1 style="text-align: center; margin-top: 250px; font-weight: 900">CLICK HERE TO JOIN</h1>
+                <h1 style="text-align: center; margin-top: 300px; font-weight: 900">CLICK HERE TO JOIN</h1>
             </a>
             </h1>
         </div>
     </div>
-</div><!-- /headerwrap -->
 
 <div id="signupdiv" class="container">
     <div class="row mt centered">
@@ -183,6 +191,7 @@
     <p class="footer centered" style="font-weight: bolder;">©2014 TruckStop &nbsp; &nbsp;Created by sAaPkUnUvA</p>
     <p class="footer centered" style="font-weight: bolder;"></p>
 </div><!-- /container -->
+</div><!-- /headerwrap -->
 
 
 <!-- Bootstrap core JavaScript
@@ -192,6 +201,22 @@
 <script src="assets/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="assets/js/modernizr.custom.86080.js"></script>
 <script type="text/javascript">
+    function gotoFacebook(){
+        window.open("http://www.facebook.com/");
+    }
+    function gotoGooglePlus(){
+        window.open("http://www.plus.google.com/")
+    }
+
+    function gotoTwitter(){
+        window.open("http://www.twitter.com/")
+    }
+    function gotoInstagram(){
+        window.open("http://www.instagram.com/")
+    }
+    function gotoPintreset(){
+        window.open("https://www.pinterest.com/")
+    }
     function formSubmit(){
         if($("#exampleHeaderInputName").val() == "") {
             $("#exampleHeaderInputName").addClass("errorClass");
